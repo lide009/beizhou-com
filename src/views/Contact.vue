@@ -141,7 +141,7 @@ const isSubmitting = ref(false)
 const errorMsg = ref('')
 
 // Web3Forms 密钥（请替换为你的真实密钥）
-const ACCESS_KEY = 'YOUR_ACCESS_KEY_HERE'
+const ACCESS_KEY = '4fa8b824-f992-47d7-b842-371536fcb035'
 
 const handleSubmit = async () => {
   isSubmitting.value = true
