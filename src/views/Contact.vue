@@ -1,0 +1,152 @@
+<template>
+  <div class="min-h-screen bg-gray-50 pt-20">
+    <div class="bg-white shadow-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <h1 class="text-3xl font-bold text-gray-800">联系我们</h1>
+        <p class="text-gray-600 mt-2">欢迎与我们取得联系</p>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div class="bg-white rounded-xl shadow-md p-6">
+          <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-800 mb-2">邮箱</h3>
+          <p class="text-gray-600">beizhou_info@163.com</p>
+          <p class="text-gray-400 text-sm mt-2">工作日 9:00 - 18:00</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md p-6">
+          <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-800 mb-2">电话</h3>
+          <p class="text-gray-600">0577-88017546</p>
+          <p class="text-gray-600">18940884096</p>
+          <p class="text-gray-400 text-sm mt-2">工作日 9:00 - 18:00</p>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-md p-6">
+          <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-semibold text-gray-800 mb-2">地址</h3>
+          <p class="text-gray-600">浙江省温州市</p>
+        </div>
+      </div>
+
+      <div class="mt-8 bg-white rounded-xl shadow-md p-8">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">留言咨询</h2>
+        <form @submit.prevent="handleSubmit" class="max-w-xl">
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2">姓名</label>
+            <input 
+              v-model="form.name"
+              type="text" 
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              placeholder="请输入您的姓名"
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2">邮箱</label>
+            <input 
+              v-model="form.email"
+              type="email" 
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              placeholder="请输入您的邮箱"
+              required
+            />
+          </div>
+          <div class="mb-4">
+            <label class="block text-gray-700 font-medium mb-2">电话</label>
+            <input 
+              v-model="form.phone"
+              type="tel" 
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+              placeholder="请输入您的电话"
+            />
+          </div>
+          <div class="mb-6">
+            <label class="block text-gray-700 font-medium mb-2">留言内容</label>
+            <textarea 
+              v-model="form.message"
+              rows="4" 
+              class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
+              placeholder="请输入您的留言内容"
+              required
+            ></textarea>
+          </div>
+          <button 
+            type="submit"
+            class="px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-secondary transition-colors"
+          >
+            提交留言
+          </button>
+        </form>
+        <div v-if="showSuccess" class="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg text-green-700">
+          感谢您的留言！邮件客户端已打开，请确认发送。我们会尽快与您联系。
+        </div>
+      </div>
+
+      <div class="mt-8 bg-primary rounded-xl p-8 text-white">
+        <h2 class="text-2xl font-bold mb-4 text-center">关注公众号</h2>
+        <div class="flex flex-col md:flex-row items-center justify-center gap-8">
+          <div class="bg-white p-4 rounded-xl">
+            <div class="w-48 h-48 bg-gray-100 rounded-lg flex items-center justify-center">
+              <div class="text-center">
+                <svg class="w-24 h-24 mx-auto text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.691 2.188C3.891 2.188 0 5.476 0 9.53c0 2.212 1.17 4.203 3.002 5.55a.59.59 0 01.213.665l-.39 1.48c-.019.07-.048.141-.048.213 0 .163.13.295.29.295a.326.326 0 00.167-.054l1.903-1.114a.864.864 0 01.717-.098 10.16 10.16 0 002.837.403c4.801 0 8.692-3.287 8.692-7.342 0-4.054-3.891-7.339-8.692-7.339zm-3.11 4.216a.926.926 0 110-1.85.926.926 0 010 1.85zm2.24 0a.926.926 0 110-1.85.926.926 0 010 1.85zm1.658 3.317c-1.797 0-3.256 1.459-3.256 3.256 0 1.797 1.459 3.256 3.256 3.256 1.797 0 3.256-1.459 3.256-3.256 0-1.797-1.459-3.256-3.256-3.256zm-2.24 0a.926.926 0 110-1.85.926.926 0 010 1.85zm2.24 0a.926.926 0 110-1.85.926.926 0 010 1.85z"/>
+                </svg>
+                <p class="text-gray-500 text-sm mt-2">公众号二维码</p>
+              </div>
+            </div>
+          </div>
+          <div class="text-center md:text-left">
+            <p class="text-blue-100 mb-4">公众号名称：北州芯片科技</p>
+            <p class="text-blue-100">也欢迎您在公众号对话框私信留言，谢谢！</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { reactive, ref } from 'vue'
+
+const form = reactive({
+  name: '',
+  email: '',
+  phone: '',
+  message: ''
+})
+
+const showSuccess = ref(false)
+
+const handleSubmit = () => {
+  const subject = `【北州芯片科技】咨询留言 - ${form.name}`
+  const body = `姓名: ${form.name}\n邮箱: ${form.email}\n电话: ${form.phone}\n留言: ${form.message}`
+  const mailtoUrl = `mailto:beizhou_info@163.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+  window.location.href = mailtoUrl
+  
+  showSuccess.value = true
+  
+  setTimeout(() => {
+    showSuccess.value = false
+    form.name = ''
+    form.email = ''
+    form.phone = ''
+    form.message = ''
+  }, 5000)
+}
+</script>
