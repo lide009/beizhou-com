@@ -88,13 +88,17 @@
           </div>
           <button 
             type="submit"
-            class="px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-secondary transition-colors"
+            :disabled="isSubmitting"
+            class="px-6 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-secondary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            提交留言
+            {{ isSubmitting ? '提交中...' : '提交留言' }}
           </button>
         </form>
         <div v-if="showSuccess" class="mt-4 p-4 bg-green-50 border border-green-200 rounded-lg text-green-700">
-          感谢您的留言！邮件客户端已打开，请确认发送。我们会尽快与您联系。
+          感谢您的留言！我们已收到您的信息，会尽快与您联系。
+        </div>
+        <div v-if="showError" class="mt-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-700">
+          {{ errorMsg }}
         </div>
       </div>
 
@@ -132,21 +136,50 @@ const form = reactive({
 })
 
 const showSuccess = ref(false)
+const showError = ref(false)
+const isSubmitting = ref(false)
+const errorMsg = ref('')
 
-const handleSubmit = () => {
-  const subject = `【北州芯片科技】咨询留言 - ${form.name}`
-  const body = `姓名: ${form.name}\n邮箱: ${form.email}\n电话: ${form.phone}\n留言: ${form.message}`
-  const mailtoUrl = `mailto:beizhou_info@163.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
-  window.location.href = mailtoUrl
-  
-  showSuccess.value = true
-  
-  setTimeout(() => {
-    showSuccess.value = false
-    form.name = ''
-    form.email = ''
-    form.phone = ''
-    form.message = ''
-  }, 5000)
+// Web3Forms 密钥（请替换为你的真实密钥）
+const ACCESS_KEY = 'YOUR_ACCESS_KEY_HERE'
+
+const handleSubmit = async () => {
+  isSubmitting.value = true
+  showSuccess.value = false
+  showError.value = false
+
+  try {
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        access_key: ACCESS_KEY,
+        subject: `【北州芯片科技】咨询留言 - ${form.name}`,
+        from_name: form.name,
+        name: form.name,
+        email: form.email,
+        phone: form.phone,
+        message: form.message
+      })
+    })
+
+    const result = await response.json()
+
+    if (result.success) {
+      showSuccess.value = true
+      form.name = ''
+      form.email = ''
+      form.phone = ''
+      form.message = ''
+    } else {
+      showError.value = true
+      errorMsg.value = result.message || '提交失败，请稍后再试'
+    }
+  } catch (err) {
+    showError.value = true
+    errorMsg.value = '网络错误，请检查网络后重试'
+  } finally {
+    isSubmitting.value = false
+  }
 }
 </script>
