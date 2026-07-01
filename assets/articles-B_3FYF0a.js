@@ -1,0 +1,1 @@
+const e={name:"北州芯片科技",nameEn:"BEIZHOU TECHNOLOGY",description:"专注国产光刻胶的研发及销售，微流控芯片定制设计加工及相关产品制造",experience:"20年微加工及微流控系统搭建经验",facility:"百平米千级超净间",partners:["北京大学","中科院研究所","法国巴黎高等师范学院","日本京都大学"],papers:"支持近百篇高质量论文发表"};export{e as c};
