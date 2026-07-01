@@ -1,17 +1,22 @@
+<script setup>
+const logoUrl = new URL('/北州logo.jpg', import.meta.url).href
+const qrCodeUrl = new URL('/北州公众号二维码.jpg', import.meta.url).href
+</script>
+
 <template>
   <footer class="bg-gray-900 text-white py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
         <div class="col-span-1 md:col-span-2">
           <div class="flex items-center space-x-3 mb-4">
-            <img :src="new URL('/北州logo.jpg', import.meta.url).href" alt="北州芯片科技" class="w-10 h-10 rounded-lg object-cover" />
+            <img :src="logoUrl" alt="北州芯片科技" class="w-10 h-10 rounded-lg object-cover" />
             <span class="text-xl font-bold">北州芯片科技</span>
           </div>
           <p class="text-gray-400 mb-4">
             北州芯片科技——专注于SU-8 BZ3000系列光刻胶的研发与销售。80℃低温工艺，高深宽比媲美进口，降本增效的国产替代新选择。
           </p>
           <div class="flex items-center space-x-4">
-            <img :src="new URL('/北州公众号二维码.jpg', import.meta.url).href" alt="公众号二维码" class="w-12 h-12 rounded-lg object-cover" />
+            <img :src="qrCodeUrl" alt="公众号二维码" class="w-12 h-12 rounded-lg object-cover" />
             <div class="text-sm">
               <div class="text-gray-300 font-medium">公众号</div>
               <div class="text-gray-500">北州芯片科技</div>

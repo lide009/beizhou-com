@@ -106,7 +106,7 @@
         <h2 class="text-2xl font-bold mb-4 text-center">关注公众号</h2>
         <div class="flex flex-col md:flex-row items-center justify-center gap-8">
           <div class="bg-white p-4 rounded-xl">
-            <img :src="new URL('/北州公众号二维码.jpg', import.meta.url).href" alt="公众号二维码" class="w-48 h-48 rounded-lg object-cover" />
+            <img :src="qrCodeUrl" alt="公众号二维码" class="w-48 h-48 rounded-lg object-cover" />
           </div>
           <div class="text-center md:text-left">
             <p class="text-blue-100 mb-4">公众号名称：北州芯片科技</p>
@@ -120,6 +120,8 @@
 
 <script setup>
 import { reactive, ref } from 'vue'
+
+const qrCodeUrl = new URL('/北州公众号二维码.jpg', import.meta.url).href
 
 const form = reactive({
   name: '',
