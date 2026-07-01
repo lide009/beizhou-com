@@ -17,7 +17,7 @@
           </div>
           <h3 class="font-semibold text-gray-800 mb-2">邮箱</h3>
           <p class="text-gray-600">beizhou_info@163.com</p>
-          <p class="text-gray-400 text-sm mt-2">工作日 9:00 - 18:00</p>
+          <p class="text-gray-400 text-sm mt-2">工作日 8:30 - 17:30</p>
         </div>
 
         <div class="bg-white rounded-xl shadow-md p-6">
@@ -29,7 +29,7 @@
           <h3 class="font-semibold text-gray-800 mb-2">电话</h3>
           <p class="text-gray-600">0577-88017546</p>
           <p class="text-gray-600">18940884096</p>
-          <p class="text-gray-400 text-sm mt-2">工作日 9:00 - 18:00</p>
+          <p class="text-gray-400 text-sm mt-2">工作日 8:30 - 17:30</p>
         </div>
 
         <div class="bg-white rounded-xl shadow-md p-6">
