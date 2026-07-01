@@ -116,29 +116,25 @@
           <!-- 价格对比表 -->
           <div class="lg:col-span-3 bg-white rounded-xl shadow-md overflow-hidden border border-gray-100">
             <div class="bg-gradient-to-r from-primary to-secondary px-6 py-4">
-              <h3 class="text-white font-semibold text-lg">SU-8光刻胶价格对比</h3>
+              <h3 class="text-white font-semibold text-lg">SU-8光刻胶综合对比</h3>
             </div>
             <div class="overflow-x-auto">
               <table class="w-full text-sm md:text-base">
                 <thead>
                   <tr class="bg-gray-50">
-                    <th class="px-6 py-4 text-left font-semibold text-gray-600 border-b-2 border-gray-200">规格</th>
-                    <th class="px-6 py-4 text-center font-semibold text-primary border-b-2 border-primary">北州SU-8光刻胶</th>
-                    <th class="px-6 py-4 text-center font-semibold text-gray-500 border-b-2 border-gray-200">进口SU-8光刻胶</th>
-                    <th class="px-6 py-4 text-center font-semibold text-accent border-b-2 border-accent">价格优势</th>
+                    <th class="px-6 py-3 text-left font-semibold text-gray-600 border-b-2 border-gray-200">项目</th>
+                    <th class="px-6 py-3 text-center font-semibold text-primary border-b-2 border-primary">北州SU-8光刻胶</th>
+                    <th class="px-6 py-3 text-center font-semibold text-gray-500 border-b-2 border-gray-200">进口SU-8光刻胶</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr v-for="(row, i) in priceComparison" :key="row.spec" :class="i % 2 === 0 ? 'bg-white' : 'bg-gray-50/50'" class="hover:bg-blue-50 transition-colors">
-                    <td class="px-6 py-5 font-medium text-gray-700">{{ row.spec }}</td>
-                    <td class="px-6 py-5 text-center">
-                      <span class="inline-block bg-primary/10 text-primary font-bold px-3 py-1 rounded-full">{{ row.beizhou }}</span>
+                    <td class="px-6 py-4 font-medium text-gray-700">{{ row.spec }}</td>
+                    <td class="px-6 py-4 text-center">
+                      <span v-if="row.spec === '货期'" class="inline-block bg-green-100 text-green-600 font-bold px-3 py-1 rounded-full">{{ row.beizhou }}</span>
+                      <span v-else class="inline-block bg-primary/10 text-primary font-bold px-3 py-1 rounded-full">{{ row.beizhou }}</span>
                     </td>
-                    <td class="px-6 py-5 text-center text-gray-500">{{ row.importPrice }}</td>
-                    <td class="px-6 py-5 text-center">
-                      <span v-if="row.spec !== '货期'" class="inline-block bg-green-100 text-green-600 font-bold px-3 py-1 rounded-full text-xs">省约75%</span>
-                      <span v-else class="inline-block bg-green-100 text-green-600 font-bold px-3 py-1 rounded-full text-xs">快85%</span>
-                    </td>
+                    <td class="px-6 py-4 text-center text-gray-500">{{ row.importPrice }}</td>
                   </tr>
                 </tbody>
               </table>
