@@ -506,7 +506,7 @@ export const categories = [
 
 export const companyInfo = {
   name: '北州芯片科技',
-  nameEn: 'beizhou chip technology',
+  nameEn: 'BEIZHOU CHIP TECHNOLOGY',
   description: '专注国产光刻胶的研发及销售，微流控芯片定制设计加工及相关产品制造',
   experience: '20余年微加工及微流控系统搭建经验',
   facility: '百平米千级超净间',
