@@ -375,86 +375,6 @@
           </div>
         </div>
       </section>
-
-      <!-- ===== Section 8: 试剂耗材（来自 article id=3） ===== -->
-      <section>
-        <div class="text-center mb-10">
-          <h2 class="text-2xl font-bold text-gray-800 mb-3">试剂耗材</h2>
-          <p class="text-gray-500">批发零售光刻胶、显影液、PDMS、铬板、硅片等微纳加工耗材，可分装销售</p>
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-          <div v-for="item in consumables" :key="item.name" class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
-            <div class="w-10 h-10 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
-              <svg class="w-5 h-5 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
-              </svg>
-            </div>
-            <h3 class="font-bold text-gray-800 mb-2">{{ item.name }}</h3>
-            <p class="text-gray-500 text-sm mb-3 leading-relaxed">{{ item.desc }}</p>
-            <div v-if="item.brand" class="text-xs text-gray-400">品牌：{{ item.brand }}</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ===== Section 9: 配套仪器（来自 article id=4） ===== -->
-      <section>
-        <div class="text-center mb-10">
-          <h2 class="text-2xl font-bold text-gray-800 mb-3">配套仪器</h2>
-          <p class="text-gray-500">经销多种微流实验配套仪器，满足科研与产业需求</p>
-        </div>
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <!-- 程控泵/注射泵 -->
-          <div class="bg-white rounded-xl shadow-md p-6">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center">
-                <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                </svg>
-              </div>
-              <div>
-                <h3 class="font-bold text-gray-800">程控泵 / 注射泵</h3>
-                <span class="text-xs text-accent">TS-1B / W0109-1B</span>
-              </div>
-            </div>
-            <div class="space-y-3 text-sm text-gray-600">
-              <p><strong>程控泵</strong> — 多功能程控仪，可用于物理、化学、生物、医学及工程等领域的教学和科研，将复杂的流体操作智能化。支持在线操作（计算机图形界面）和离线操作（面板旋钮及按键）。</p>
-              <p><strong>注射泵 TS-1B/W0109-1B</strong> — 四通道推拉模式注射泵，可安装多种规格标准注射器。精确的行程控制，超宽线速度范围（7.9 μm/min — 79.4 mm/min），最大行程 90mm，行程分辨率 0.165 μm。</p>
-            </div>
-          </div>
-
-          <!-- 芯片恒温培养装置 -->
-          <div class="bg-white rounded-xl shadow-md p-6">
-            <div class="flex items-center gap-3 mb-4">
-              <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center">
-                <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 16.09 5.777 17.656 7.343A7.975 7.975 0 0120 13a7.975 7.975 0 01-2.343 5.657z"/>
-                </svg>
-              </div>
-              <div>
-                <h3 class="font-bold text-gray-800">芯片用恒温培养装置</h3>
-                <span class="text-xs text-accent">活细胞成像必备</span>
-              </div>
-            </div>
-            <div class="space-y-2 text-sm text-gray-600">
-              <p>在显微镜载物台上调控细胞培养所需的温度、湿度及 CO₂，实现从短期到长期（2周以上）的活细胞成像。</p>
-              <ul class="space-y-1 mt-2">
-                <li class="flex items-start gap-2">
-                  <span class="w-1.5 h-1.5 bg-accent rounded-full mt-1.5 flex-shrink-0"></span>
-                  <span>样品实时温度反馈功能，创造和 CO₂ 培养箱同等的温度环境</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="w-1.5 h-1.5 bg-accent rounded-full mt-1.5 flex-shrink-0"></span>
-                  <span>内置水槽设计，保持高湿度</span>
-                </li>
-                <li class="flex items-start gap-2">
-                  <span class="w-1.5 h-1.5 bg-accent rounded-full mt-1.5 flex-shrink-0"></span>
-                  <span>多种扩展应用产品配置，应对多种应用场景</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </section>
     </div>
   </div>
 </template>
@@ -523,29 +443,6 @@ const processSteps = [
   { name: '后烘', desc: '曝光后80°C烘烤4-10分钟，应可见掩模版潜像' },
   { name: '显影', desc: 'SU-8显影液浸没式/喷淋式显影1-15分钟' },
   { name: '冲洗干燥', desc: '新鲜显影液喷淋冲洗约10秒，氮气吹干' }
-]
-
-// ===== 试剂耗材数据（来自 article id=3） =====
-const consumables = [
-  {
-    name: 'SU-8 3050 光刻胶',
-    desc: '基于环氧树脂的近紫外负性光刻胶，固化膜具有出色的热稳定和机械稳定性，耐溶剂和酸碱腐蚀，适合制造永久性结构',
-    brand: 'MicroChem'
-  },
-  {
-    name: 'SU-8 显影液',
-    desc: 'SU-8专用显影液，主要成分为2-甲氧基-1-丙醇乙酸酯、乙酸-1-甲氧基-2-丙基酯',
-    brand: 'MicroChem'
-  },
-  {
-    name: 'PDMS 迈图 RTV615',
-    desc: '双组分硅橡胶，透明、介电稳定性，固化前为中等粘度液体，固化后为有韧性弹性体',
-    brand: '迈图 RTV615'
-  },
-  {
-    name: '其他耗材',
-    desc: '铬板、硅片、玻璃基底、导管等多种微纳加工耗材，支持分装销售'
-  }
 ]
 
 function goContact() {

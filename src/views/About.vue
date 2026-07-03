@@ -26,7 +26,7 @@
           <!-- 右栏：数据卡片 -->
           <div class="grid grid-cols-2 gap-4">
             <div class="bg-gradient-to-br from-primary to-secondary rounded-xl p-6 text-white text-center">
-              <div class="text-4xl font-bold mb-2">20年</div>
+              <div class="text-4xl font-bold mb-2">20余年</div>
               <div class="text-blue-200 text-sm">微加工经验</div>
             </div>
             <div class="bg-gradient-to-br from-primary to-secondary rounded-xl p-6 text-white text-center">
@@ -34,11 +34,11 @@
               <div class="text-blue-200 text-sm">百平米超净间</div>
             </div>
             <div class="bg-gradient-to-br from-primary to-secondary rounded-xl p-6 text-white text-center">
-              <div class="text-4xl font-bold mb-2">4家</div>
+              <div class="text-4xl font-bold mb-2">十余家</div>
               <div class="text-blue-200 text-sm">合作机构</div>
             </div>
             <div class="bg-gradient-to-br from-primary to-secondary rounded-xl p-6 text-white text-center">
-              <div class="text-4xl font-bold mb-2">近百篇</div>
+              <div class="text-4xl font-bold mb-2">超百篇</div>
               <div class="text-blue-200 text-sm">论文支持</div>
             </div>
           </div>
@@ -46,29 +46,33 @@
       </div>
     </section>
 
-    <!-- Section 3: 核心业务（5个卡片） -->
+    <!-- Section 3: 核心业务（2个卡片） -->
     <section class="py-16 bg-gray-50">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
           <h2 class="text-3xl font-bold text-gray-800 mb-4">核心业务</h2>
-          <p class="text-gray-600">五大业务板块，全方位服务微流控科研与产业需求</p>
+          <p class="text-gray-600">专注光刻胶研发与微加工服务，为科研与产业提供一站式解决方案</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
-          <!-- 业务1：微加工服务 → /article/1 -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
           <router-link
-            v-for="(biz, index) in businesses"
-            :key="index"
-            :to="biz.link"
-            :class="[
-              'bg-white rounded-xl shadow-md p-6 transition-all duration-300',
-              biz.link ? 'hover:shadow-lg hover:-translate-y-1 cursor-pointer' : ''
-            ]"
+            to="/products"
+            class="bg-white rounded-xl shadow-md p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer"
           >
             <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-              <span class="text-primary font-bold text-lg">{{ index + 1 }}</span>
+              <span class="text-primary font-bold text-lg">1</span>
             </div>
-            <h3 class="font-semibold text-gray-800 mb-2">{{ biz.title }}</h3>
-            <p class="text-gray-600 text-sm">{{ biz.desc }}</p>
+            <h3 class="font-semibold text-gray-800 mb-2">光刻胶研发</h3>
+            <p class="text-gray-600 text-sm">SU-8 BZ3000系列国产环氧基负性光刻胶，80°C低温工艺，性能媲美进口产品</p>
+          </router-link>
+          <router-link
+            to="/services"
+            class="bg-white rounded-xl shadow-md p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer"
+          >
+            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+              <span class="text-primary font-bold text-lg">2</span>
+            </div>
+            <h3 class="font-semibold text-gray-800 mb-2">微加工服务</h3>
+            <p class="text-gray-600 text-sm">芯片设计、掩膜加工、SU-8模具制作、PDMS芯片加工一站式服务</p>
           </router-link>
         </div>
       </div>
@@ -197,35 +201,6 @@ const partners = [
   { name: '国科温州研究院', logo: new URL('/ucas-logo.png', import.meta.url).href },
   { name: '北京师范大学', logo: new URL('/bnu-logo.png', import.meta.url).href },
   { name: '首都医科大学', logo: new URL('/ccmu-logo.png', import.meta.url).href }
-]
-
-// 五大核心业务（数据来自文章id=10的业务范围）
-const businesses = [
-  {
-    title: '微加工服务',
-    desc: '芯片设计、掩膜加工、光刻加工、PDMS工艺',
-    link: '/services'
-  },
-  {
-    title: '成品芯片',
-    desc: '细胞/细菌培养分析芯片，趋化/耐药性分析芯片',
-    link: '/services'
-  },
-  {
-    title: '试剂耗材',
-    desc: '光刻胶、显影液、硅片、铬板、PDMS、玻璃基底',
-    link: '/products'
-  },
-  {
-    title: '配套仪器',
-    desc: '程控泵/注射泵、恒温培养装置',
-    link: '/products'
-  },
-  {
-    title: '体外诊断',
-    desc: '肿瘤体外诊断、数字PCR分析微流芯片系统研发',
-    link: ''
-  }
 ]
 
 // 联系方式

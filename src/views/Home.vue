@@ -143,11 +143,11 @@
             我们的业务范围
           </h2>
           <p class="text-gray-500 max-w-2xl mx-auto">
-            从光刻胶耗材到芯片定制加工，覆盖微流控科研全链条需求
+            专注光刻胶研发与微加工服务，为科研与产业提供一站式解决方案
           </p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           <div
             v-for="(biz, idx) in businessAreas"
             :key="idx"
@@ -171,12 +171,6 @@
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
               </svg>
             </router-link>
-            <span
-              v-else
-              class="inline-flex items-center gap-1.5 text-gray-400 text-sm font-medium"
-            >
-              了解更多
-            </span>
           </div>
         </div>
       </div>
@@ -298,32 +292,17 @@ const advantages = [
   }
 ]
 
-// ============ 业务范围（数据来自文章 id=10） ============
+// ============ 业务范围 ============
 const businessAreas = [
   {
+    name: '光刻胶研发',
+    desc: 'SU-8 BZ3000系列国产环氧基负性光刻胶，80°C低温工艺，性能媲美进口产品',
+    link: '/products'
+  },
+  {
     name: '微加工服务',
-    desc: '芯片设计、掩膜加工、光刻加工、PDMS工艺等一站式服务',
+    desc: '芯片设计、掩膜加工、SU-8模具制作、PDMS芯片加工一站式服务',
     link: '/services'
-  },
-  {
-    name: '成品芯片',
-    desc: '细胞培养分析、药物筛选、高通量富集等微流控芯片产品',
-    link: '/services'
-  },
-  {
-    name: '试剂耗材',
-    desc: '光刻胶、显影液、硅片、铬板、PDMS、玻璃基底等耗材',
-    link: '/products'
-  },
-  {
-    name: '配套仪器',
-    desc: '程控泵/注射泵、芯片恒温培养装置等实验配套设备',
-    link: '/products'
-  },
-  {
-    name: '体外诊断',
-    desc: '肿瘤体外诊断、数字PCR分析微流芯片系统研发',
-    link: null
   }
 ]
 

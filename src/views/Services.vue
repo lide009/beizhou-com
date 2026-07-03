@@ -133,28 +133,7 @@
         </div>
       </section>
 
-      <!-- ===== Section 5: 成品芯片产品 ===== -->
-      <section>
-        <h2 class="text-2xl font-bold text-gray-800 mb-3 text-center">成品芯片产品系列</h2>
-        <p class="text-gray-500 text-center mb-8 text-sm">多款成熟微流控芯片产品，覆盖细胞培养、药物筛选、高通量富集等应用场景</p>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div v-for="chip in finishedChips" :key="chip.model" class="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow">
-            <div class="flex items-center gap-2 mb-3">
-              <div class="w-10 h-10 bg-primary text-white rounded-lg flex items-center justify-center font-bold text-sm">{{ chip.model.split('-')[1] }}</div>
-              <div>
-                <h3 class="font-bold text-gray-800 text-sm">{{ chip.model }}</h3>
-                <span class="text-xs text-accent">{{ chip.type }}</span>
-              </div>
-            </div>
-            <p class="text-gray-600 text-sm mb-3 leading-relaxed">{{ chip.desc }}</p>
-            <div v-if="chip.reference" class="bg-gray-50 rounded-lg p-3 text-xs text-gray-500">
-              <span class="text-gray-400">参考：</span>{{ chip.reference }}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ===== Section 6: CTA ===== -->
+      <!-- ===== Section 5: CTA ===== -->
       <section>
         <div class="bg-gradient-to-r from-primary to-secondary rounded-2xl shadow-xl overflow-hidden">
           <div class="px-6 py-12 md:px-12 md:py-16 text-center text-white">
@@ -187,24 +166,5 @@ const serviceSteps = [
 // 交付成果（来自 article id=1）
 const deliverables = ['设计图纸', '光刻掩膜', '硅片模具', 'PDMS芯片', '质检报告', '量产支持']
 
-// 成品芯片产品（来自 article id=2）
-const finishedChips = [
-  {
-    model: 'BZh-Chip001',
-    type: '细胞培养与药物筛选',
-    desc: '可实现多种哺乳动物细胞培养，进行药物筛选。适用于高通量细胞迁移实验和组合化学环境下的药物评价。',
-    reference: 'High-throughput cell migration assay under combinatorial chemical environments by a novel 24-well-plate based device. Biomedical Microdevices, 2020, 22, 40'
-  },
-  {
-    model: 'BZh-Chip002',
-    type: '高通量富集培养筛选',
-    desc: '动物细胞的高通量富集、培养及筛选。基于单层微流控器件实现自加载和细胞培养功能。',
-    reference: 'Self-loading and cell culture in one layer microfluidic devices. Biomedical Microdevices, 2009, 11, 679-684'
-  },
-  {
-    model: 'BZh-Chip003',
-    type: '哺乳动物细胞培养',
-    desc: '哺乳动物细胞的培养与分析，适用于细胞生物学基础研究和药物测试。'
-  }
-]
+
 </script>
