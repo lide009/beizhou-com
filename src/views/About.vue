@@ -53,26 +53,30 @@
           <h2 class="text-3xl font-bold text-gray-800 mb-4">核心业务</h2>
           <p class="text-gray-600">专注光刻胶研发与微加工服务，为科研与产业提供一站式解决方案</p>
         </div>
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
           <router-link
             to="/products"
-            class="bg-white rounded-xl shadow-md p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer"
+            class="group bg-white rounded-2xl shadow-sm p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 cursor-pointer border border-gray-100"
           >
-            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-              <span class="text-primary font-bold text-lg">1</span>
+            <div class="w-14 h-14 bg-gradient-to-br from-primary/10 to-secondary/10 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+              <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/>
+              </svg>
             </div>
-            <h3 class="font-semibold text-gray-800 mb-2">光刻胶研发</h3>
-            <p class="text-gray-600 text-sm">SU-8 BZ3000系列国产环氧基负性光刻胶，80°C低温工艺，性能媲美进口产品</p>
+            <h3 class="text-xl font-bold text-gray-800 mb-3">光刻胶研发</h3>
+            <p class="text-gray-600 leading-relaxed">SU-8 BZ3000系列国产环氧基负性光刻胶，80°C低温工艺，性能媲美进口产品</p>
           </router-link>
           <router-link
             to="/services"
-            class="bg-white rounded-xl shadow-md p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer"
+            class="group bg-white rounded-2xl shadow-sm p-8 transition-all duration-300 hover:shadow-xl hover:-translate-y-2 cursor-pointer border border-gray-100"
           >
-            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-              <span class="text-primary font-bold text-lg">2</span>
+            <div class="w-14 h-14 bg-gradient-to-br from-accent/10 to-green-500/10 rounded-xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
+              <svg class="w-7 h-7 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+              </svg>
             </div>
-            <h3 class="font-semibold text-gray-800 mb-2">微加工服务</h3>
-            <p class="text-gray-600 text-sm">芯片设计、掩膜加工、SU-8模具制作、PDMS芯片加工一站式服务</p>
+            <h3 class="text-xl font-bold text-gray-800 mb-3">微加工服务</h3>
+            <p class="text-gray-600 leading-relaxed">芯片设计、掩膜加工、SU-8模具制作、PDMS芯片加工一站式服务</p>
           </router-link>
         </div>
       </div>
