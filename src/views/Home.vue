@@ -30,7 +30,7 @@
             <div class="flex flex-wrap gap-4 justify-center lg:justify-start">
               <router-link
                 to="/products"
-                class="px-8 py-3.5 bg-white text-primary font-semibold rounded-lg hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl transform hover:-translate-y-0.5"
+                class="px-8 py-3.5 border-2 border-white/80 text-white font-semibold rounded-lg hover:bg-white hover:text-primary transition-all transform hover:-translate-y-0.5"
               >
                 了解产品
               </router-link>
