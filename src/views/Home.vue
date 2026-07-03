@@ -147,20 +147,15 @@
           </p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div class="grid grid-cols-1 sm:grid-cols-2 max-w-3xl mx-auto gap-6">
           <div
             v-for="(biz, idx) in businessAreas"
             :key="idx"
             class="group relative bg-white rounded-xl p-6 shadow-sm hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
           >
-            <!-- 序号 -->
-            <div class="w-10 h-10 bg-primary/10 text-primary rounded-lg flex items-center justify-center font-bold text-lg mb-4 group-hover:bg-primary group-hover:text-white transition-colors">
-              {{ idx + 1 }}
-            </div>
             <h3 class="text-lg font-semibold text-gray-800 mb-2">{{ biz.name }}</h3>
             <p class="text-sm text-gray-500 mb-4 leading-relaxed">{{ biz.desc }}</p>
 
-            <!-- 链接 -->
             <router-link
               v-if="biz.link"
               :to="biz.link"

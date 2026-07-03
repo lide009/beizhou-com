@@ -153,13 +153,13 @@
             <div class="p-6">
               <div class="flex items-center justify-center gap-6">
                 <div class="text-center">
-                  <div class="text-4xl font-extrabold text-green-600">2周</div>
-                  <p class="text-gray-500 text-sm mt-1">北州SU-8</p>
-                </div>
-                <div class="text-gray-300 text-2xl">→</div>
-                <div class="text-center">
                   <div class="text-3xl font-bold text-gray-400">2个月+</div>
                   <p class="text-gray-500 text-sm mt-1">进口SU-8</p>
+                </div>
+                <div class="text-gray-300 text-2xl">←</div>
+                <div class="text-center">
+                  <div class="text-4xl font-extrabold text-green-600">2周</div>
+                  <p class="text-gray-500 text-sm mt-1">北州SU-8</p>
                 </div>
               </div>
               <div class="mt-4 bg-green-50 rounded-lg p-3 text-center">
