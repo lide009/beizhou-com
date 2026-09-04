@@ -22,7 +22,7 @@
               {{ companyInfo.nameEn }}
             </p>
             <p class="text-xl md:text-2xl text-white/90 font-medium mb-4 leading-relaxed">
-              {{ companyInfo.description }}
+              专注国产光刻胶的研发及销售，<br>微流控芯片定制设计加工及相关产品制造
             </p>
             <p class="text-base text-blue-100 mb-8 leading-relaxed max-w-lg mx-auto lg:mx-0">
               {{ companyInfo.experience }} · {{ companyInfo.facility }}
@@ -106,7 +106,7 @@
             为什么选择我们
           </span>
           <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-            SU-8 BZ 六大核心优势
+            SU-8 BZ系列六大核心优势
           </h2>
           <p class="text-gray-500 max-w-2xl mx-auto">
             基于进口SU-8工艺经验自主研发，面向科研与产业的国产高性能厚胶解决方案
@@ -290,7 +290,7 @@ const advantages = [
 // ============ 业务范围 ============
 const businessAreas = [
   {
-    name: '光刻胶研发',
+    name: '光刻胶产品',
     desc: 'SU-8 BZ系列国产环氧基负性光刻胶，80°C低温工艺，性能媲美进口产品',
     link: '/products'
   },

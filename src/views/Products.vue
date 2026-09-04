@@ -3,10 +3,9 @@
     <!-- ===== Section 1: 页面标题区 ===== -->
     <div class="bg-gradient-to-r from-primary to-secondary text-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
-        <h1 class="text-3xl md:text-4xl font-bold mb-3">产品中心</h1>
-        <p class="text-lg md:text-xl text-blue-100">SU-8 BZ系列国产环氧基负性光刻胶</p>
+        <h1 class="text-3xl md:text-4xl font-bold mb-3">SU-8 BZ系列国产环氧基负性光刻胶</h1>
         <div class="mt-6 flex flex-wrap gap-3">
-          <span class="px-3 py-1 bg-white/20 rounded-full text-sm">膜厚覆盖 1.5 — 95 μm</span>
+          <span class="px-3 py-1 bg-white/20 rounded-full text-sm">膜厚覆盖 1.5-95 μm</span>
           <span class="px-3 py-1 bg-white/20 rounded-full text-sm">保质期 13 个月</span>
           <span class="px-3 py-1 bg-white/20 rounded-full text-sm">80°C 低温工艺</span>
         </div>
@@ -33,7 +32,7 @@
                 </div>
                 <div class="flex items-start gap-3">
                   <span class="w-20 text-sm font-semibold text-gray-500 flex-shrink-0">膜厚范围</span>
-                  <span>1.5 — 95 μm</span>
+                  <span>1.5-95 μm</span>
                 </div>
                 <div class="flex items-start gap-3">
                   <span class="w-20 text-sm font-semibold text-gray-500 flex-shrink-0">保质期</span>
@@ -114,7 +113,7 @@
         <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">产品优势</h2>
         <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <!-- 价格对比卡片 -->
-          <div class="bg-white rounded-xl shadow-md overflow-hidden">
+          <div class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
             <div class="bg-gradient-to-r from-primary to-secondary px-6 py-4">
               <div class="flex items-center gap-2">
                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -123,25 +122,22 @@
                 <h3 class="text-white font-semibold">价格优势</h3>
               </div>
             </div>
-            <div class="p-6">
-              <div class="space-y-4">
-                <div v-for="item in priceComparison.slice(0, 2)" :key="item.spec" class="flex items-center justify-between pb-4 border-b border-gray-100 last:border-0 last:pb-0">
+            <div class="p-6 flex flex-col flex-1">
+              <div class="space-y-4 flex-1">
+                <div v-for="item in priceComparison" :key="item.spec" class="flex items-center justify-between pb-4 border-b border-gray-100 last:border-0 last:pb-0">
                   <span class="text-gray-600 font-medium">{{ item.spec }}</span>
-                  <div class="flex items-center gap-4">
-                    <span class="text-primary font-bold">{{ item.beizhou }}</span>
-                    <span class="text-gray-400 text-sm line-through">{{ item.importPrice }}</span>
-                  </div>
+                  <span class="text-primary font-bold">{{ item.beizhou }}</span>
                 </div>
               </div>
               <div class="mt-4 bg-green-50 rounded-lg p-3 text-center">
-                <span class="text-green-600 font-bold">省约75%</span>
+                <span class="text-green-600 font-bold">约进口品牌价格的1/4</span>
                 <p class="text-green-500 text-xs mt-1">大幅降低研发试错成本</p>
               </div>
             </div>
           </div>
 
           <!-- 货期优势卡片 -->
-          <div class="bg-white rounded-xl shadow-md overflow-hidden">
+          <div class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
             <div class="bg-gradient-to-r from-green-500 to-green-600 px-6 py-4">
               <div class="flex items-center gap-2">
                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -150,8 +146,8 @@
                 <h3 class="text-white font-semibold">货期优势</h3>
               </div>
             </div>
-            <div class="p-6">
-              <div class="flex items-center justify-center gap-6">
+            <div class="p-6 flex flex-col flex-1">
+              <div class="flex items-center justify-center gap-6 flex-1">
                 <div class="text-center">
                   <div class="text-3xl font-bold text-gray-400">2个月+</div>
                   <p class="text-gray-500 text-sm mt-1">进口SU-8</p>
@@ -170,7 +166,7 @@
           </div>
 
           <!-- 供应链优势卡片 -->
-          <div class="bg-white rounded-xl shadow-md overflow-hidden">
+          <div class="bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
             <div class="bg-gradient-to-r from-accent to-blue-500 px-6 py-4">
               <div class="flex items-center gap-2">
                 <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -179,8 +175,8 @@
                 <h3 class="text-white font-semibold">供应链可控</h3>
               </div>
             </div>
-            <div class="p-6">
-              <ul class="space-y-3">
+            <div class="p-6 flex flex-col flex-1">
+              <ul class="space-y-3 flex-1">
                 <li class="flex items-start gap-2">
                   <span class="w-2 h-2 bg-accent rounded-full mt-2 flex-shrink-0"></span>
                   <span class="text-gray-600 text-sm">国产自主供应，不受国际形势影响</span>
@@ -223,35 +219,7 @@
       <!-- ===== Section 6: 安全须知 ===== -->
       <section>
         <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">安全须知</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-          <!-- 危险标识 -->
-          <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-red-500">
-            <div class="flex items-center gap-2 mb-3">
-              <svg class="w-6 h-6 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.082 16.5c-.77.833.192 2.5 1.732 2.5z"/>
-              </svg>
-              <h3 class="font-bold text-gray-800">危险标识</h3>
-            </div>
-            <ul class="space-y-2 text-sm text-gray-600">
-              <li class="flex items-start gap-2">
-                <span class="w-2 h-2 bg-red-400 rounded-full mt-1.5 flex-shrink-0"></span>
-                <span><strong>H227</strong>：可燃液体（丙类，闪点>60°C）</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="w-2 h-2 bg-orange-400 rounded-full mt-1.5 flex-shrink-0"></span>
-                <span><strong>H315</strong>：造成皮肤刺激</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="w-2 h-2 bg-orange-400 rounded-full mt-1.5 flex-shrink-0"></span>
-                <span><strong>H319</strong>：造成严重眼刺激</span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="w-2 h-2 bg-gray-400 rounded-full mt-1.5 flex-shrink-0"></span>
-                <span class="text-gray-400 text-xs">不属于危险化学品（闪点75-90°C）</span>
-              </li>
-            </ul>
-          </div>
-
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
           <!-- 个人防护 -->
           <div class="bg-white rounded-xl shadow-md p-6 border-l-4 border-blue-500">
             <div class="flex items-center gap-2 mb-3">
@@ -410,18 +378,17 @@ const advantages = [
 
 // ===== 产品型号数据（来自 2026-8-28 版使用说明书 表1） =====
 const productModels = [
-  { model: 'SU-8 BZ 02', thickness: '1.5 — 6.2 μm', application: '薄膜结构' },
-  { model: 'SU-8 BZ 05', thickness: '3.1 — 14 μm', application: '标准微结构' },
-  { model: 'SU-8 BZ 15', thickness: '10 — 38 μm', application: '厚膜微结构' },
-  { model: 'SU-8 BZ 25', thickness: '16 — 65 μm', application: '厚膜/高深宽比结构' },
-  { model: 'SU-8 BZ 50', thickness: '24 — 95 μm', application: '超厚膜/高深宽比结构' }
+  { model: 'SU-8 BZ 02', thickness: '1.5-6.2 μm', application: '薄膜结构' },
+  { model: 'SU-8 BZ 05', thickness: '3.1-14 μm', application: '标准微结构' },
+  { model: 'SU-8 BZ 15', thickness: '10-38 μm', application: '厚膜微结构' },
+  { model: 'SU-8 BZ 25', thickness: '16-65 μm', application: '厚膜/高深宽比结构' },
+  { model: 'SU-8 BZ 50', thickness: '24-95 μm', application: '超厚膜/高深宽比结构' }
 ]
 
-// ===== 价格对比数据（来自 articles id=5 OCR数据） =====
+// ===== 价格对比数据 =====
 const priceComparison = [
-  { spec: '500 mL', beizhou: '0.4万元', importPrice: '1.2 — 1.4万元' },
-  { spec: '100 mL', beizhou: '1千元', importPrice: '3 — 4千元' },
-  { spec: '货期', beizhou: '2周', importPrice: '2个月以上' }
+  { spec: '500 mL', beizhou: '4000元' },
+  { spec: '100 mL', beizhou: '1000元' }
 ]
 
 // ===== 工艺流程步骤（来自 2026-8-28 版使用说明书） =====
