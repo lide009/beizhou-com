@@ -4,9 +4,9 @@
     <div class="bg-gradient-to-r from-primary to-secondary text-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-20">
         <h1 class="text-3xl md:text-4xl font-bold mb-3">产品中心</h1>
-        <p class="text-lg md:text-xl text-blue-100">SU-8 BZ3000系列国产环氧基负性光刻胶</p>
+        <p class="text-lg md:text-xl text-blue-100">SU-8 BZ系列国产环氧基负性光刻胶</p>
         <div class="mt-6 flex flex-wrap gap-3">
-          <span class="px-3 py-1 bg-white/20 rounded-full text-sm">膜厚覆盖 1.3 — 110 μm</span>
+          <span class="px-3 py-1 bg-white/20 rounded-full text-sm">膜厚覆盖 1.5 — 95 μm</span>
           <span class="px-3 py-1 bg-white/20 rounded-full text-sm">保质期 13 个月</span>
           <span class="px-3 py-1 bg-white/20 rounded-full text-sm">80°C 低温工艺</span>
         </div>
@@ -33,7 +33,7 @@
                 </div>
                 <div class="flex items-start gap-3">
                   <span class="w-20 text-sm font-semibold text-gray-500 flex-shrink-0">膜厚范围</span>
-                  <span>1.3 — 110 μm</span>
+                  <span>1.5 — 95 μm</span>
                 </div>
                 <div class="flex items-start gap-3">
                   <span class="w-20 text-sm font-semibold text-gray-500 flex-shrink-0">保质期</span>
@@ -203,11 +203,11 @@
         </div>
       </section>
 
-      <!-- ===== Section 5: 工艺流程（7步） ===== -->
+      <!-- ===== Section 5: 工艺流程（8步） ===== -->
       <section>
         <h2 class="text-2xl font-bold text-gray-800 mb-3 text-center">标准工艺流程</h2>
-        <p class="text-gray-500 text-center mb-8 text-sm">SU-8 BZ3000系列操作流程简洁明了，与进口SU-8工艺高度兼容</p>
-        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-4">
+        <p class="text-gray-500 text-center mb-8 text-sm">SU-8 BZ系列操作流程简洁明了，与进口SU-8工艺高度兼容</p>
+        <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           <div v-for="(step, i) in processSteps" :key="step.name" class="relative">
             <div class="bg-white rounded-xl shadow-md p-5 text-center h-full hover:shadow-lg transition-shadow border-t-4 border-accent">
               <div class="w-10 h-10 bg-primary text-white rounded-full flex items-center justify-center mx-auto mb-3 font-bold text-sm">
@@ -215,12 +215,6 @@
               </div>
               <h3 class="font-bold text-gray-800 mb-2 text-sm">{{ step.name }}</h3>
               <p class="text-gray-500 text-xs leading-relaxed">{{ step.desc }}</p>
-            </div>
-            <!-- 箭头连接符（除最后一个外） -->
-            <div v-if="i < processSteps.length - 1" class="hidden lg:block absolute -right-3 top-1/2 -translate-y-1/2 z-10">
-              <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
-              </svg>
             </div>
           </div>
         </div>
@@ -297,19 +291,19 @@
             <ul class="space-y-2 text-sm text-gray-600">
               <li class="flex items-start gap-2">
                 <span class="w-2 h-2 bg-green-400 rounded-full mt-1.5 flex-shrink-0"></span>
-                <span>阴凉、通风库房，<strong>4-25°C</strong></span>
+                <span>阴凉、干燥、避光环境，直立<strong>密封存放</strong></span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="w-2 h-2 bg-green-400 rounded-full mt-1.5 flex-shrink-0"></span>
-                <span>避光保存，<strong>远离热源和火源</strong></span>
+                <span><strong>远离</strong>光线、酸类、热源和火源</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="w-2 h-2 bg-green-400 rounded-full mt-1.5 flex-shrink-0"></span>
-                <span>容器严格<strong>密封</strong>，与氧化剂分开存放</span>
+                <span>长期储存<strong>4-10°C</strong>，使用前恢复至<strong>20-25°C</strong></span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="w-2 h-2 bg-green-400 rounded-full mt-1.5 flex-shrink-0"></span>
-                <span>长期储存推荐<strong>4°C</strong></span>
+                <span>保质期<strong>13 个月</strong>（4°C 储存）</span>
               </li>
             </ul>
           </div>
@@ -353,23 +347,16 @@
                 <div class="inline-block bg-white/20 text-white text-sm font-semibold px-4 py-1 rounded-full mb-4">
                   淘宝店购买
                 </div>
-                <h2 class="text-2xl md:text-3xl font-bold mb-4">北州芯片科技淘宝店</h2>
+                <h2 class="text-2xl md:text-3xl font-bold mb-4">淘宝店：北州芯片科技</h2>
                 <p class="text-orange-100 text-lg mb-2">SU-8光刻胶、显影液、PDMS等耗材</p>
-                <p class="text-orange-200 text-sm mb-6">点击下方二维码进入淘宝店选购</p>
+                <p class="text-orange-200 text-sm mb-6">手机淘宝扫一扫右侧二维码进店选购</p>
                 <button @click="goContact" class="px-6 py-2 bg-white text-orange-600 font-bold rounded-lg hover:bg-orange-50 transition-colors shadow-lg">
                   联系客服咨询
                 </button>
               </div>
-              <div class="bg-white p-4 rounded-xl">
-                <div class="w-48 h-48 bg-gray-100 rounded-lg flex items-center justify-center">
-                  <div class="text-center">
-                    <svg class="w-20 h-20 mx-auto text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/>
-                    </svg>
-                    <p class="text-gray-500 text-sm mt-2">淘宝店二维码</p>
-                    <p class="text-gray-400 text-xs">后续补充</p>
-                  </div>
-                </div>
+              <div class="bg-white p-4 rounded-xl text-center">
+                <img :src="taobaoQrUrl" alt="北州芯片科技淘宝店二维码" class="w-48 h-48 rounded-lg object-contain" />
+                <p class="text-gray-500 text-sm mt-2">淘宝店：北州芯片科技</p>
               </div>
             </div>
           </div>
@@ -385,6 +372,8 @@ import { useRouter } from 'vue-router'
 
 const router = useRouter()
 
+const taobaoQrUrl = new URL('/淘宝店铺二维码-仅二维码.jpg', import.meta.url).href
+
 // ===== 6大优势（来自 articles id=5 OCR数据） =====
 const advantages = [
   {
@@ -399,13 +388,13 @@ const advantages = [
   },
   {
     icon: 'M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4',
-    title: '深宽比 ≥ 3:1',
-    desc: '能够制造非常高的深宽比结构，满足厚膜应用需求'
+    title: '局部深宽比接近 3:1',
+    desc: '能够制造非常高的局部深宽比结构，满足厚膜应用需求'
   },
   {
     icon: 'M8 9l4-4 4 4m0 6l-4 4-4-4',
     title: '侧壁垂直度优异',
-    desc: '近乎垂直的侧壁图形，确保微结构精度'
+    desc: '垂直侧壁，70μm 高度内 >85°，确保微结构精度'
   },
   {
     icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
@@ -419,12 +408,13 @@ const advantages = [
   }
 ]
 
-// ===== 产品型号数据（来自 articles id=5 OCR数据） =====
+// ===== 产品型号数据（来自 2026-8-28 版使用说明书 表1） =====
 const productModels = [
-  { model: 'SU-8 BZ3002', thickness: '1.3 — 4 μm', application: '薄膜结构' },
-  { model: 'SU-8 BZ3005', thickness: '3.8 — 12 μm', application: '标准微结构' },
-  { model: 'SU-8 BZ3015', thickness: '12 — 36 μm', application: '厚膜微结构' },
-  { model: 'SU-8 BZ3050', thickness: '38 — 110 μm', application: '超厚膜/高深宽比结构' }
+  { model: 'SU-8 BZ 02', thickness: '1.5 — 6.2 μm', application: '薄膜结构' },
+  { model: 'SU-8 BZ 05', thickness: '3.1 — 14 μm', application: '标准微结构' },
+  { model: 'SU-8 BZ 15', thickness: '10 — 38 μm', application: '厚膜微结构' },
+  { model: 'SU-8 BZ 25', thickness: '16 — 65 μm', application: '厚膜/高深宽比结构' },
+  { model: 'SU-8 BZ 50', thickness: '24 — 95 μm', application: '超厚膜/高深宽比结构' }
 ]
 
 // ===== 价格对比数据（来自 articles id=5 OCR数据） =====
@@ -434,15 +424,16 @@ const priceComparison = [
   { spec: '货期', beizhou: '2周', importPrice: '2个月以上' }
 ]
 
-// ===== 工艺流程步骤（来自 articles id=7 OCR数据） =====
+// ===== 工艺流程步骤（来自 2026-8-28 版使用说明书） =====
 const processSteps = [
-  { name: '基片准备', desc: '基片清洁干燥，建议190°C加热5分钟去除水分子吸附' },
+  { name: '基片准备', desc: '基片清洁干燥，190°C加热5分钟以上去除水分子吸附' },
   { name: '旋涂', desc: '500rpm/10s预涂 + 3000rpm/30s高速旋涂匀胶' },
-  { name: '前烘', desc: '水平热板80°C烘烤3-50分钟（依膜厚而定）' },
-  { name: '曝光', desc: 'i-line(365nm)紫外曝光，能量250-900 mJ/cm²' },
-  { name: '后烘', desc: '曝光后80°C烘烤4-10分钟，应可见掩模版潜像' },
-  { name: '显影', desc: 'SU-8显影液浸没式/喷淋式显影1-15分钟' },
-  { name: '冲洗干燥', desc: '新鲜显影液喷淋冲洗约10秒，氮气吹干' }
+  { name: '前烘', desc: '水平热板80°C烘烤3-50分钟（依膜厚而定，BZ 50建议95°C）' },
+  { name: '曝光', desc: 'i-line(365nm)紫外曝光，能量80-550 mJ/cm²（依膜厚而定）' },
+  { name: '后烘', desc: '曝光后80°C烘烤4-11分钟，应可见掩模版潜像' },
+  { name: '显影', desc: 'SU-8显影液浸没式/喷淋式显影0.2-12分钟' },
+  { name: '冲洗干燥', desc: '新鲜显影液喷淋冲洗约10秒，氮气吹干' },
+  { name: '坚膜', desc: '80°C热板坚膜20-30分钟（可选），提升交联度与附着力' }
 ]
 
 function goContact() {

@@ -51,7 +51,7 @@
                   核心产品
                 </span>
                 <div class="text-5xl md:text-6xl font-bold mb-3 tracking-tight">SU-8</div>
-                <div class="text-xl md:text-2xl font-semibold mb-6">BZ3000 系列光刻胶</div>
+                <div class="text-xl md:text-2xl font-semibold mb-6">BZ 系列光刻胶</div>
 
                 <!-- 核心卖点 -->
                 <div class="space-y-3 text-left">
@@ -72,7 +72,7 @@
                   <div class="flex items-center gap-3 bg-white/10 rounded-lg px-4 py-3">
                     <span class="text-xl">📐</span>
                     <div>
-                      <p class="font-semibold text-sm">深宽比 ≥ 3:1</p>
+                      <p class="font-semibold text-sm">局部深宽比接近 3:1</p>
                       <p class="text-blue-200 text-xs">媲美进口产品</p>
                     </div>
                   </div>
@@ -106,7 +106,7 @@
             为什么选择我们
           </span>
           <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-            SU-8 BZ3000 六大核心优势
+            SU-8 BZ 六大核心优势
           </h2>
           <p class="text-gray-500 max-w-2xl mx-auto">
             基于进口SU-8工艺经验自主研发，面向科研与产业的国产高性能厚胶解决方案
@@ -267,7 +267,7 @@ const advantages = [
   },
   {
     icon: '📐',
-    title: '深宽比 ≥ 3:1',
+    title: '局部深宽比接近 3:1',
     desc: '能够制造非常高的深宽比结构，性能媲美进口产品'
   },
   {
@@ -291,7 +291,7 @@ const advantages = [
 const businessAreas = [
   {
     name: '光刻胶研发',
-    desc: 'SU-8 BZ3000系列国产环氧基负性光刻胶，80°C低温工艺，性能媲美进口产品',
+    desc: 'SU-8 BZ系列国产环氧基负性光刻胶，80°C低温工艺，性能媲美进口产品',
     link: '/products'
   },
   {

@@ -27,8 +27,10 @@
             </svg>
           </div>
           <h3 class="font-semibold text-gray-800 mb-2">电话</h3>
-          <p class="text-gray-600">0577-88017546</p>
-          <p class="text-gray-600">18940884096</p>
+          <p class="text-gray-500 text-sm">座机：0577-88017546</p>
+          <p class="text-gray-600 mt-1">18940884096</p>
+          <p class="text-gray-600">13121755667</p>
+          <p class="text-gray-600">18518027214</p>
           <p class="text-gray-400 text-sm mt-2">工作日 8:30 - 17:30</p>
         </div>
 
@@ -103,14 +105,21 @@
       </div>
 
       <div class="mt-8 bg-primary rounded-xl p-8 text-white">
-        <h2 class="text-2xl font-bold mb-4 text-center">关注公众号</h2>
-        <div class="flex flex-col md:flex-row items-center justify-center gap-8">
-          <div class="bg-white p-4 rounded-xl">
-            <img :src="qrCodeUrl" alt="公众号二维码" class="w-48 h-48 rounded-lg object-cover" />
+        <h2 class="text-2xl font-bold mb-6 text-center">关注我们</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
+          <div class="flex flex-col items-center">
+            <div class="bg-white p-4 rounded-xl">
+              <img :src="qrCodeUrl" alt="公众号二维码" class="w-44 h-44 rounded-lg object-cover" />
+            </div>
+            <p class="font-semibold mt-3">公众号：北州芯片科技</p>
+            <p class="text-blue-100 text-sm mt-1">欢迎在公众号对话框私信留言</p>
           </div>
-          <div class="text-center md:text-left">
-            <p class="text-blue-100 mb-4">公众号名称：北州芯片科技</p>
-            <p class="text-blue-100">也欢迎您在公众号对话框私信留言，谢谢！</p>
+          <div class="flex flex-col items-center">
+            <div class="bg-white p-4 rounded-xl">
+              <img :src="taobaoQrUrl" alt="淘宝店二维码" class="w-44 h-44 rounded-lg object-contain" />
+            </div>
+            <p class="font-semibold mt-3">淘宝店：北州芯片科技</p>
+            <p class="text-blue-100 text-sm mt-1">光刻胶、显影液、PDMS等耗材选购</p>
           </div>
         </div>
       </div>
@@ -122,6 +131,7 @@
 import { reactive, ref } from 'vue'
 
 const qrCodeUrl = new URL('/北州公众号二维码.jpg', import.meta.url).href
+const taobaoQrUrl = new URL('/淘宝店铺二维码-仅二维码.jpg', import.meta.url).href
 
 const form = reactive({
   name: '',

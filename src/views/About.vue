@@ -64,7 +64,7 @@
               </svg>
             </div>
             <h3 class="text-xl font-bold text-gray-800 mb-3">光刻胶研发</h3>
-            <p class="text-gray-600 leading-relaxed">SU-8 BZ3000系列国产环氧基负性光刻胶，80°C低温工艺，性能媲美进口产品</p>
+            <p class="text-gray-600 leading-relaxed">SU-8 BZ系列国产环氧基负性光刻胶，80°C低温工艺，性能媲美进口产品</p>
           </router-link>
           <router-link
             to="/services"
@@ -175,7 +175,9 @@
               </svg>
             </div>
             <div class="text-blue-200 text-sm mb-1">手机</div>
-            <div class="font-medium">{{ contactInfo.mobile }}</div>
+            <div class="font-medium space-y-0.5">
+              <p v-for="m in contactInfo.mobiles" :key="m">{{ m }}</p>
+            </div>
           </div>
           <div class="text-center">
             <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-3">
@@ -211,7 +213,7 @@ const partners = [
 const contactInfo = {
   email: 'beizhou_info@163.com',
   phone: '0577-88017546',
-  mobile: '18940884096',
+  mobiles: ['18940884096', '13121755667', '18518027214'],
   address: '浙江省温州市'
 }
 </script>
