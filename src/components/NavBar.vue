@@ -89,6 +89,7 @@ const navItems = [
   { name: '首页', path: '/' },
   { name: '产品中心', path: '/products' },
   { name: '芯片加工', path: '/services' },
+  { name: '询价工具', path: '/inquiry' },
   { name: '关于我们', path: '/about' },
   { name: '联系我们', path: '/contact' }
 ]

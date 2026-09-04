@@ -30,6 +30,7 @@ const qrCodeUrl = new URL('/北州公众号二维码.jpg', import.meta.url).href
             <li><router-link to="/" class="text-gray-400 hover:text-white transition-colors">首页</router-link></li>
             <li><router-link to="/products" class="text-gray-400 hover:text-white transition-colors">产品中心</router-link></li>
             <li><router-link to="/services" class="text-gray-400 hover:text-white transition-colors">芯片加工</router-link></li>
+            <li><router-link to="/inquiry" class="text-gray-400 hover:text-white transition-colors">询价工具</router-link></li>
             <li><router-link to="/about" class="text-gray-400 hover:text-white transition-colors">关于我们</router-link></li>
             <li><router-link to="/contact" class="text-gray-400 hover:text-white transition-colors">联系我们</router-link></li>
           </ul>
