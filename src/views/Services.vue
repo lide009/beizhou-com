@@ -69,13 +69,13 @@
 
           <!-- SU-8 模具 -->
           <div class="bg-white rounded-xl shadow-md p-6">
-            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
               </svg>
             </div>
             <h3 class="font-bold text-gray-800 mb-2">SU-8 模具</h3>
-            <div class="text-2xl font-bold text-primary mb-2">低至 1500 元/版</div>
+            <div class="text-2xl font-bold text-accent mb-2">低至 1500 元/版</div>
             <ul class="space-y-1.5 text-sm text-gray-600">
               <li class="flex items-start gap-2">
                 <span class="w-1.5 h-1.5 bg-accent rounded-full mt-1.5 flex-shrink-0"></span>
@@ -83,24 +83,24 @@
               </li>
               <li class="flex items-start gap-2">
                 <span class="w-1.5 h-1.5 bg-accent rounded-full mt-1.5 flex-shrink-0"></span>
-                <span>膜厚范围：<strong>1.5-95 μm</strong></span>
+                <span>膜厚范围：<strong>1.5-100 μm</strong></span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="w-1.5 h-1.5 bg-accent rounded-full mt-1.5 flex-shrink-0"></span>
-                <span>可批量复用浇铸芯片</span>
+                <span>支持多层套刻</span>
               </li>
             </ul>
           </div>
 
           <!-- PDMS 芯片 -->
           <div class="bg-white rounded-xl shadow-md p-6">
-            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-accent" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
               </svg>
             </div>
             <h3 class="font-bold text-gray-800 mb-2">PDMS芯片</h3>
-            <div class="text-2xl font-bold text-primary mb-2">低至 50 元/块</div>
+            <div class="text-2xl font-bold text-accent mb-2">低至 50 元/块</div>
             <ul class="space-y-1.5 text-sm text-gray-600">
               <li class="flex items-start gap-2">
                 <span class="w-1.5 h-1.5 bg-accent rounded-full mt-1.5 flex-shrink-0"></span>
@@ -108,7 +108,11 @@
               </li>
               <li class="flex items-start gap-2">
                 <span class="w-1.5 h-1.5 bg-accent rounded-full mt-1.5 flex-shrink-0"></span>
-                <span>对位键合 + 质检报告</span>
+                <span>与PDMS或玻片键合</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 bg-accent rounded-full mt-1.5 flex-shrink-0"></span>
+                <span>支持对位键合</span>
               </li>
             </ul>
           </div>
