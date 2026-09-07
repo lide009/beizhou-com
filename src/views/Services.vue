@@ -42,31 +42,6 @@
       <section>
         <h2 class="text-2xl font-bold text-gray-800 mb-6 text-center">服务项目与价格</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <!-- 高精度菲林掩膜 -->
-          <div class="bg-white rounded-xl shadow-md p-6">
-            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
-              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/>
-              </svg>
-            </div>
-            <h3 class="font-bold text-gray-800 mb-2">高精度菲林掩膜</h3>
-            <div class="text-2xl font-bold text-primary mb-2">低至 150 元/版</div>
-            <ul class="space-y-1.5 text-sm text-gray-600">
-              <li class="flex items-start gap-2">
-                <span class="w-1.5 h-1.5 bg-accent rounded-full mt-1.5 flex-shrink-0"></span>
-                <span>最小线宽：<strong>20 μm</strong></span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="w-1.5 h-1.5 bg-accent rounded-full mt-1.5 flex-shrink-0"></span>
-                <span>精度：约 <strong>5 μm</strong></span>
-              </li>
-              <li class="flex items-start gap-2">
-                <span class="w-1.5 h-1.5 bg-accent rounded-full mt-1.5 flex-shrink-0"></span>
-                <span>适用于常规结构验证与基础实验</span>
-              </li>
-            </ul>
-          </div>
-
           <!-- 高精度铬板掩膜 -->
           <div class="bg-white rounded-xl shadow-md p-6">
             <div class="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
@@ -75,7 +50,7 @@
               </svg>
             </div>
             <h3 class="font-bold text-gray-800 mb-2">高精度铬板掩膜</h3>
-            <div class="text-2xl font-bold text-accent mb-2">高精度首选</div>
+            <div class="text-2xl font-bold text-accent mb-2">低至 700 元/版</div>
             <ul class="space-y-1.5 text-sm text-gray-600">
               <li class="flex items-start gap-2">
                 <span class="w-1.5 h-1.5 bg-accent rounded-full mt-1.5 flex-shrink-0"></span>
@@ -92,20 +67,44 @@
             </ul>
           </div>
 
-          <!-- SU-8模具 + PDMS芯片 -->
+          <!-- SU-8 模具 -->
           <div class="bg-white rounded-xl shadow-md p-6">
             <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
               <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"/>
               </svg>
             </div>
-            <h3 class="font-bold text-gray-800 mb-2">SU-8模具 + PDMS芯片</h3>
-            <div class="text-2xl font-bold text-primary mb-2">模具低至 1500 元/版</div>
-            <div class="text-lg font-semibold text-gray-700 mb-2">PDMS芯片低至 50 元/块</div>
+            <h3 class="font-bold text-gray-800 mb-2">SU-8 模具</h3>
+            <div class="text-2xl font-bold text-primary mb-2">低至 1500 元/版</div>
             <ul class="space-y-1.5 text-sm text-gray-600">
               <li class="flex items-start gap-2">
                 <span class="w-1.5 h-1.5 bg-accent rounded-full mt-1.5 flex-shrink-0"></span>
-                <span>SU-8模具制作 + PDMS浇铸、切割、打孔</span>
+                <span>SU-8模具制作与质检</span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 bg-accent rounded-full mt-1.5 flex-shrink-0"></span>
+                <span>膜厚范围：<strong>1.5-95 μm</strong></span>
+              </li>
+              <li class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 bg-accent rounded-full mt-1.5 flex-shrink-0"></span>
+                <span>可批量复用浇铸芯片</span>
+              </li>
+            </ul>
+          </div>
+
+          <!-- PDMS 芯片 -->
+          <div class="bg-white rounded-xl shadow-md p-6">
+            <div class="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"/>
+              </svg>
+            </div>
+            <h3 class="font-bold text-gray-800 mb-2">PDMS芯片</h3>
+            <div class="text-2xl font-bold text-primary mb-2">低至 50 元/块</div>
+            <ul class="space-y-1.5 text-sm text-gray-600">
+              <li class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 bg-accent rounded-full mt-1.5 flex-shrink-0"></span>
+                <span>PDMS浇铸、切割、打孔</span>
               </li>
               <li class="flex items-start gap-2">
                 <span class="w-1.5 h-1.5 bg-accent rounded-full mt-1.5 flex-shrink-0"></span>
@@ -139,12 +138,20 @@
           <div class="px-6 py-12 md:px-12 md:py-16 text-center text-white">
             <h2 class="text-2xl md:text-3xl font-bold mb-4">需要定制微流控芯片？</h2>
             <p class="text-blue-100 text-lg mb-8">从设计到量产，我们提供一站式芯片加工服务</p>
-            <router-link
-              to="/contact"
-              class="inline-block px-8 py-3 bg-white text-primary font-bold rounded-lg hover:bg-blue-50 transition-colors shadow-lg text-lg"
-            >
-              联系我们
-            </router-link>
+            <div class="flex flex-wrap gap-4 justify-center">
+              <router-link
+                to="/contact"
+                class="inline-block px-8 py-3 bg-white text-primary font-bold rounded-lg hover:bg-blue-50 transition-colors shadow-lg text-lg"
+              >
+                联系我们
+              </router-link>
+              <router-link
+                to="/inquiry"
+                class="inline-block px-8 py-3 bg-white text-primary font-bold rounded-lg hover:bg-blue-50 transition-colors shadow-lg text-lg"
+              >
+                自助估价
+              </router-link>
+            </div>
           </div>
         </div>
       </section>
