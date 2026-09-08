@@ -116,7 +116,7 @@
               </svg>
             </div>
             <p class="text-gray-600 leading-relaxed">
-              产品经<strong>北京大学微加工与微流控平台教授课题组</strong>测试验证并认可
+              产品经<strong>北京大学微加工与微流控平台</strong>测试验证并认可
             </p>
           </div>
           <div class="bg-white rounded-xl shadow-md p-8 text-center">
