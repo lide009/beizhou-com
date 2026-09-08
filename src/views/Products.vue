@@ -356,8 +356,8 @@ const advantages = [
   },
   {
     icon: 'M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4',
-    title: '局部深宽比接近 3:1',
-    desc: '能够制造非常高的局部深宽比结构，满足厚膜应用需求'
+    title: '局部高宽比接近 3:1',
+    desc: '能够制造非常高的局部高宽比结构，满足厚膜应用需求'
   },
   {
     icon: 'M8 9l4-4 4 4m0 6l-4 4-4-4',
@@ -381,8 +381,8 @@ const productModels = [
   { model: 'SU-8 BZ 02', thickness: '1.5-6.2 μm', application: '薄膜结构' },
   { model: 'SU-8 BZ 05', thickness: '3.1-14 μm', application: '标准微结构' },
   { model: 'SU-8 BZ 15', thickness: '10-38 μm', application: '厚膜微结构' },
-  { model: 'SU-8 BZ 25', thickness: '16-65 μm', application: '厚膜/高深宽比结构' },
-  { model: 'SU-8 BZ 50', thickness: '24-95 μm', application: '超厚膜/高深宽比结构' }
+  { model: 'SU-8 BZ 25', thickness: '16-65 μm', application: '厚膜/高高宽比结构' },
+  { model: 'SU-8 BZ 50', thickness: '24-95 μm', application: '超厚膜/高高宽比结构' }
 ]
 
 // ===== 价格对比数据 =====

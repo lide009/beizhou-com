@@ -13,7 +13,7 @@ const qrCodeUrl = new URL('/北州公众号二维码.jpg', import.meta.url).href
             <span class="text-xl font-bold">北州芯片科技</span>
           </div>
           <p class="text-gray-400 mb-4">
-            北州芯片科技——专注于SU-8 BZ系列光刻胶的研发与销售。80℃低温工艺，高深宽比媲美进口，降本增效的国产替代新选择。
+            北州芯片科技——专注于SU-8 BZ系列光刻胶的研发与销售。80℃低温工艺，高高宽比媲美进口，降本增效的国产替代新选择。
           </p>
           <div class="flex items-center space-x-4">
             <img :src="qrCodeUrl" alt="公众号二维码" class="w-12 h-12 rounded-lg object-cover" />

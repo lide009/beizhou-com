@@ -72,7 +72,7 @@
                   <div class="flex items-center gap-3 bg-white/10 rounded-lg px-4 py-3">
                     <span class="text-xl">📐</span>
                     <div>
-                      <p class="font-semibold text-sm">局部深宽比接近 3:1</p>
+                      <p class="font-semibold text-sm">局部高宽比接近 3:1</p>
                       <p class="text-blue-200 text-xs">媲美进口产品</p>
                     </div>
                   </div>
@@ -267,8 +267,8 @@ const advantages = [
   },
   {
     icon: '📐',
-    title: '局部深宽比接近 3:1',
-    desc: '能够制造非常高的深宽比结构，性能媲美进口产品'
+    title: '局部高宽比接近 3:1',
+    desc: '能够制造非常高的高宽比结构，性能媲美进口产品'
   },
   {
     icon: '📏',
