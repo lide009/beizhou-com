@@ -1,0 +1,1530 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>北州芯片科技 - 微流控芯片询价工具</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<style>
+:root {
+  --primary: #1a73e8; --primary-light: #e8f0fe; --primary-dark: #1557b0;
+  --success: #0d904f; --warning: #e89c00; --danger: #d93025;
+  --bg: #f5f7fa; --card: #fff; --text: #202124; --text-secondary: #5f6368;
+  --border: #e0e0e0; --radius: 12px; --shadow: 0 2px 12px rgba(0,0,0,0.08);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.6;
+  -webkit-font-smoothing: antialiased; max-width: 640px; margin: 0 auto; min-height: 100vh;
+}
+.header {
+  background: #fff; padding: 10px 20px; text-align: center; position: sticky; top: 0; z-index: 100;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+}
+.header-logo { height: 50px; width: auto; }
+.header-text { text-align: center; }
+.header-text .subtitle { font-size: 12px; color: var(--text-secondary); }
+    .header-text .header-title { font-size: 17px; font-weight: 700; color: var(--text); }
+.header-rights { font-size: 10px; color: var(--text-secondary); text-align: center; padding: 4px; border-top: 1px solid #f0f0f0; }
+
+.progress-wrap { background: #fff; padding: 12px 20px; border-bottom: 1px solid var(--border); }
+.progress-steps { display: flex; justify-content: space-between; position: relative; }
+.progress-steps::before {
+  content: ''; position: absolute; top: 13px; left: 25px; right: 25px;
+  height: 2px; background: var(--border); z-index: 0;
+}
+.step-dot {
+  width: 28px; height: 28px; border-radius: 50%; background: #fff;
+  border: 2px solid var(--border); display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: var(--text-secondary); z-index: 2;
+  transition: all 0.3s; position: relative;
+}
+.step-dot.active { background: var(--primary); border-color: var(--primary); color: #fff; }
+.step-dot.done { background: var(--success); border-color: var(--success); color: #fff; }
+.step-label { font-size: 10px; color: var(--text-secondary); text-align: center; margin-top: 4px; transition: color 0.3s; }
+.step-label.active { color: var(--primary); font-weight: 600; }
+.step-col { display:flex; flex-direction:column; align-items:center; z-index:2; }
+
+.main { padding: 16px; }
+.step-content { display: none; }
+.step-content.active { display: block; }
+
+.card { background: var(--card); border-radius: var(--radius); padding: 20px; margin-bottom: 16px; box-shadow: var(--shadow); }
+.card h3 { font-size: 16px; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.card h3 .icon { font-size: 20px; }
+
+.form-group { margin-bottom: 16px; }
+.form-group:last-child { margin-bottom: 0; }
+.form-group label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; color: var(--text); }
+.form-group .hint { font-size: 12px; color: var(--text-secondary); margin-bottom: 6px; }
+.form-group input, .form-group textarea, .form-group select {
+  width: 100%; padding: 10px 14px; border: 1.5px solid var(--border);
+  border-radius: 8px; font-size: 14px; font-family: inherit; background: #fafafa;
+  transition: all 0.2s; -webkit-appearance: none; appearance: none;
+}
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus {
+  outline: none; border-color: var(--primary); background: #fff; box-shadow: 0 0 0 3px var(--primary-light);
+}
+.form-group textarea { min-height: 80px; resize: vertical; }
+.form-group input[type="number"] { -moz-appearance: textfield; }
+.form-group input[type="number"]::-webkit-outer-spin-button,
+.form-group input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+
+.radio-group { display: flex; flex-direction: column; gap: 8px; }
+.radio-option {
+  display: flex; align-items: flex-start; gap: 10px; padding: 12px 14px;
+  border: 1.5px solid var(--border); border-radius: 8px; cursor: pointer;
+  transition: all 0.2s; background: #fafafa;
+}
+.radio-option:hover { border-color: var(--primary); background: var(--primary-light); }
+.radio-option.selected { border-color: var(--primary); background: var(--primary-light); }
+.radio-option input[type="radio"] { display: none; }
+.radio-option .radio-indicator {
+  width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border);
+  flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s;
+}
+.radio-option.selected .radio-indicator { border-color: var(--primary); background: var(--primary); }
+.radio-option.selected .radio-indicator::after { content: ''; width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+.radio-option .radio-text { flex: 1; }
+.radio-option .radio-title { font-size: 14px; font-weight: 600; }
+.radio-option .radio-desc { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+
+.btn-row { display: flex; gap: 12px; margin-top: 16px; }
+.btn {
+  flex: 1; padding: 12px 20px; border: none; border-radius: 8px; font-size: 15px;
+  font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: inherit; text-align: center;
+}
+.btn-primary { background: var(--primary); color: #fff; }
+.btn-primary:hover { background: var(--primary-dark); }
+.btn-primary:active { transform: scale(0.98); }
+.btn-outline { background: #fff; color: var(--primary); border: 1.5px solid var(--primary); }
+.btn-outline:hover { background: var(--primary-light); }
+.btn-success { background: var(--success); color: #fff; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.kb-toggle { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--primary); cursor: pointer; padding: 8px 0; font-weight: 500; }
+.kb-toggle:hover { text-decoration: underline; }
+.kb-content { display: none; background: #f8faff; border: 1px solid #d2e3fc; border-radius: 8px; padding: 14px 16px; margin-top: 8px; font-size: 13px; line-height: 1.8; }
+.kb-content.open { display: block; }
+.kb-content h4 { font-size: 14px; margin: 12px 0 6px; color: var(--primary-dark); }
+.kb-content h4:first-child { margin-top: 0; }
+.kb-content ul, .kb-content ol { padding-left: 18px; margin: 4px 0; }
+.kb-content li { margin-bottom: 4px; }
+
+.quote-table { width: 100%; border-collapse: collapse; font-size: 13px; }
+.quote-table th, .quote-table td { padding: 10px 12px; text-align: left; border-bottom: 1px solid var(--border); }
+.quote-table th { background: #f8f9fa; font-weight: 600; font-size: 12px; color: var(--text-secondary); }
+.quote-table .total-row td { font-weight: 700; font-size: 16px; color: var(--primary); border-top: 2px solid var(--primary); }
+.quote-table .note-row td { font-size: 11px; color: var(--text-secondary); border: none; padding-top: 4px; }
+.quote-table .price-col { text-align: right; white-space: nowrap; }
+
+.acceptance-list { list-style: none; }
+.acceptance-list li {
+  padding: 10px 14px; margin-bottom: 8px; background: #f8f9fa; border-radius: 8px;
+  font-size: 13px; border-left: 3px solid var(--success); display: flex; align-items: flex-start; gap: 8px;
+}
+.acceptance-list li .check { color: var(--success); font-weight: 700; font-size: 16px; flex-shrink: 0; }
+
+.warning-banner {
+  background: #fef7e0; border: 1px solid #f9d849; border-radius: 8px; padding: 12px 14px;
+  font-size: 12px; color: #5f4b00; margin-bottom: 16px; display: flex; align-items: flex-start; gap: 8px;
+}
+.info-banner {
+  background: #e8f0fe; border: 1px solid #d2e3fc; border-radius: 8px; padding: 12px 14px;
+  font-size: 12px; color: #1a3a5c; margin-bottom: 16px; display: flex; align-items: flex-start; gap: 8px;
+}
+
+.difficulty-badge { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 12px; font-weight: 600; }
+.difficulty-badge.low { background: #e6f4ea; color: #0d904f; }
+.difficulty-badge.medium { background: #fef7e0; color: #e89c00; }
+.difficulty-badge.high { background: #fce8e6; color: #d93025; }
+
+.checkbox-group { display: flex; flex-direction: column; gap: 10px; }
+.checkbox-option {
+  display: flex; align-items: center; gap: 10px; padding: 12px 14px;
+  border: 1.5px solid var(--border); border-radius: 8px; cursor: pointer;
+  transition: all 0.2s; background: #fafafa;
+}
+.checkbox-option:hover { border-color: var(--primary); }
+.checkbox-option.checked { border-color: var(--primary); background: var(--primary-light); }
+.checkbox-option input[type="checkbox"] { display: none; }
+.checkbox-option .cb-indicator {
+  width: 22px; height: 22px; border-radius: 4px; border: 2px solid var(--border);
+  flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+  transition: all 0.2s; font-size: 14px; color: transparent;
+}
+.checkbox-option.checked .cb-indicator { background: var(--primary); border-color: var(--primary); color: #fff; }
+.checkbox-option .cb-text { flex: 1; }
+.checkbox-option .cb-title { font-size: 14px; font-weight: 600; }
+.checkbox-option .cb-desc { font-size: 12px; color: var(--text-secondary); margin-top: 2px; }
+.checkbox-option .cb-price { font-weight: 700; color: var(--primary); white-space: nowrap; font-size: 14px; }
+
+.layer-card { background: #f8f9fa; border: 1px solid var(--border); border-radius: 8px; padding: 14px; margin-bottom: 12px; }
+.layer-card .layer-title { font-weight: 700; font-size: 14px; margin-bottom: 10px; color: var(--primary-dark); }
+.layer-card .form-group { margin-bottom: 10px; }
+.layer-card .form-group:last-child { margin-bottom: 0; }
+
+.price-ref { display: inline-block; font-size: 12px; color: var(--primary); font-weight: 600; margin-left: 6px; background: var(--primary-light); padding: 2px 8px; border-radius: 10px; }
+
+.pdms-calc { background: #f0f7f0; border: 1px solid #c6e6c6; border-radius: 8px; padding: 14px; margin-top: 12px; }
+.pdms-calc .result { font-size: 18px; font-weight: 700; color: var(--success); text-align: center; margin-top: 8px; }
+
+.footer { text-align: center; padding: 20px; font-size: 12px; color: var(--text-secondary); border-top: 1px solid var(--border); margin-top: 20px; }
+.toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: #333; color: #fff; padding: 10px 20px; border-radius: 20px; font-size: 13px; z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+.toast.show { opacity: 1; }
+
+.range-wrap { position: relative; }
+.range-wrap input[type="range"] { width: 100%; -webkit-appearance: none; height: 6px; border-radius: 3px; background: var(--border); outline: none; margin: 8px 0; }
+.range-wrap input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 24px; border-radius: 50%; background: var(--primary); cursor: pointer; border: 3px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.2); }
+.range-value { text-align: center; font-weight: 600; color: var(--primary); font-size: 14px; }
+
+.bottom-btn-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 12px; }
+.bottom-btn-grid .btn { flex: 0; padding: 10px 12px; font-size: 13px; }
+
+/* 手机端响应式字体适配 */
+@media (max-width: 480px) {
+  body { font-size: 16px; }
+  .header-logo { height: 44px; }
+  .header-text .subtitle { font-size: 13px; }
+      .header-text .header-title { font-size: 18px; }
+  .header-rights { font-size: 11px; }
+  .progress-wrap { padding: 10px 12px; }
+  .step-dot { width: 30px; height: 30px; font-size: 14px; }
+  .step-label { font-size: 11px; }
+  .main { padding: 12px; }
+  .card { padding: 16px; }
+  .card h3 { font-size: 18px; }
+  .card h3 .icon { font-size: 22px; }
+  .form-group label { font-size: 15px; }
+  .form-group .hint { font-size: 13px; }
+  .form-group input, .form-group textarea, .form-group select {
+    font-size: 16px; padding: 12px 14px;
+  }
+  .radio-option { padding: 14px 16px; }
+  .radio-option .radio-title { font-size: 15px; }
+  .radio-option .radio-desc { font-size: 13px; }
+  .radio-option .radio-indicator { width: 22px; height: 22px; }
+  .btn { font-size: 16px; padding: 14px 18px; }
+  .kb-toggle { font-size: 14px; }
+  .kb-content { font-size: 14px; padding: 12px 14px; }
+  .kb-content h4 { font-size: 15px; }
+  .quote-table { font-size: 14px; }
+  .quote-table th, .quote-table td { padding: 12px 10px; }
+  .quote-table th { font-size: 13px; }
+  .quote-table .total-row td { font-size: 18px; }
+  .quote-table .note-row td { font-size: 12px; }
+  .acceptance-list li { font-size: 14px; padding: 12px 14px; }
+  .acceptance-list li .check { font-size: 18px; }
+  .warning-banner { font-size: 13px; padding: 12px; }
+  .info-banner { font-size: 13px; padding: 12px; }
+  .difficulty-badge { font-size: 13px; padding: 5px 12px; }
+  .checkbox-option { padding: 14px 16px; }
+  .checkbox-option .cb-title { font-size: 15px; }
+  .checkbox-option .cb-desc { font-size: 13px; }
+  .checkbox-option .cb-price { font-size: 15px; }
+  .checkbox-option .cb-indicator { width: 24px; height: 24px; font-size: 16px; }
+  .layer-card { padding: 12px; }
+  .layer-card .layer-title { font-size: 15px; }
+  .price-ref { font-size: 13px; padding: 3px 10px; }
+  .pdms-calc .result { font-size: 20px; }
+  .footer { font-size: 13px; padding: 16px; }
+  .toast { font-size: 14px; padding: 12px 22px; }
+  .range-value { font-size: 15px; }
+  .range-wrap input[type="range"]::-webkit-slider-thumb { width: 28px; height: 28px; }
+  .bottom-btn-grid { gap: 10px; }
+  .bottom-btn-grid .btn { font-size: 14px; padding: 12px 10px; }
+}
+
+/* 超小屏幕适配 (iPhone SE等) */
+@media (max-width: 360px) {
+  body { font-size: 15px; }
+  .main { padding: 10px; }
+  .card { padding: 14px; }
+  .card h3 { font-size: 16px; }
+  .form-group input, .form-group textarea, .form-group select { font-size: 15px; }
+  .btn { font-size: 15px; padding: 12px 14px; }
+  .quote-table { font-size: 13px; }
+  .quote-table th, .quote-table td { padding: 10px 8px; }
+  .quote-table .total-row td { font-size: 16px; }
+  .bottom-btn-grid .btn { font-size: 13px; padding: 10px 8px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-text">
+    <div class="header-title">北州芯片科技 · 微流控芯片定制加工询价工具</div>
+    <div class="subtitle">五步填写需求，自动生成参考报价 v1.0</div>
+  </div>
+</div>
+<div class="header-rights">版权与解释权归北州芯片科技所有</div>
+
+<div class="progress-wrap">
+  <div class="progress-steps">
+    <div class="step-col"><div class="step-dot active" data-step="1">1</div><div class="step-label active">基本信息</div></div>
+    <div class="step-col"><div class="step-dot" data-step="2">2</div><div class="step-label">掩膜特征</div></div>
+    <div class="step-col"><div class="step-dot" data-step="3">3</div><div class="step-label">模具特征</div></div>
+    <div class="step-col"><div class="step-dot" data-step="4">4</div><div class="step-label">芯片特征</div></div>
+    <div class="step-col"><div class="step-dot" data-step="5">5</div><div class="step-label">报价验收</div></div>
+  </div>
+</div>
+
+<div class="main">
+
+<!-- ====== STEP 1: 基本信息 ====== -->
+<div class="step-content active" data-step="1">
+  <div class="card">
+    <h3><span class="icon">&#128100;</span> 客户基本信息 <span style="font-size:11px;color:var(--text-secondary);font-weight:400;">（选填）</span></h3>
+    <div class="form-group">
+      <label>姓名</label>
+      <input type="text" id="customerName" placeholder="请输入您的姓名（选填）">
+    </div>
+    <div class="form-group">
+      <label>单位 / 机构</label>
+      <input type="text" id="customerOrg" placeholder="请输入您所在的单位或学校（选填）">
+    </div>
+    <div class="form-group">
+      <label>联系方式（微信/手机/邮箱）</label>
+      <input type="text" id="customerContact" placeholder="方便我们后续与您沟通（选填）">
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">&#127919;</span> 应用场景 <span style="font-size:11px;color:var(--text-secondary);font-weight:400;">（选填）</span></h3>
+    <div class="form-group">
+      <label>芯片类型</label>
+      <select id="chipType">
+        <option value="">请选择...</option>
+        <option value="droplet">液滴生成芯片</option>
+        <option value="cell-culture">细胞培养芯片</option>
+        <option value="organ-chip">器官芯片</option>
+        <option value="gradient">浓度梯度芯片</option>
+        <option value="mixer">混合反应芯片</option>
+        <option value="separation">分离筛选芯片</option>
+        <option value="custom">其他定制结构</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>请描述您的芯片应用场景</label>
+      <textarea id="appScenario" placeholder="请简要描述您要用微流控芯片做什么实验...（选填）"></textarea>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">&#128736;</span> 服务项目选择</h3>
+    <div class="checkbox-group">
+      <div class="checkbox-option" id="optDesign" onclick="toggleCheckbox(this, event)">
+        <input type="checkbox" id="needDesign">
+        <span class="cb-indicator">&#10003;</span>
+        <span class="cb-text">
+          <span class="cb-title">方案设计服务</span>
+          <span class="cb-desc">根据实验需求定制芯片结构设计</span>
+        </span>
+        <span class="cb-price">2000元/次</span>
+      </div>
+      <div class="checkbox-option" id="optDrawing" onclick="toggleCheckbox(this, event)">
+        <input type="checkbox" id="needDrawing">
+        <span class="cb-indicator">&#10003;</span>
+        <span class="cb-text">
+          <span class="cb-title">绘图服务</span>
+          <span class="cb-desc">根据标注尺寸的简易图纸，绘制为标准图纸</span>
+        </span>
+        <span class="cb-price">1000元/层</span>
+      </div>
+    </div>
+    <div class="checkbox-group" style="margin-top:10px;">
+      <div class="checkbox-option" id="optMask" onclick="toggleCheckbox(this, event)">
+        <input type="checkbox" id="needMask">
+        <span class="cb-indicator">&#10003;</span>
+        <span class="cb-text">
+          <span class="cb-title">掩膜制作</span>
+          <span class="cb-desc">菲林掩膜150元/片 | 铬版掩膜3寸700元/4寸900元</span>
+        </span>
+      </div>
+      <div class="checkbox-option" id="optMold" onclick="toggleCheckbox(this, event)">
+        <input type="checkbox" id="needMold">
+        <span class="cb-indicator">&#10003;</span>
+        <span class="cb-text">
+          <span class="cb-title">SU-8模具制作</span>
+          <span class="cb-desc">2-30&#956;m：4寸1500元/5寸2000元 | 30-100&#956;m：4寸2000元/5寸2500元</span>
+        </span>
+      </div>
+      <div class="checkbox-option" id="optPDMS" onclick="toggleCheckbox(this, event)">
+        <input type="checkbox" id="needPDMS">
+        <span class="cb-indicator">&#10003;</span>
+        <span class="cb-text">
+          <span class="cb-title">PDMS芯片制作</span>
+          <span class="cb-desc">&#8804;6块且&#60;60孔：480元/板 | 超出+40元/块 | 对位键合&#215;3或&#215;5</span>
+        </span>
+      </div>
+    </div>
+    <div id="noDrawingNotice" style="display:block;margin-top:12px;">
+      <div class="info-banner">
+        <span>&#128208; <b>自行提供图纸要求：</b>请提供标准格式的矢量图纸，支持 <b>GDSII / DXF / DWG</b> 格式，需标注清晰尺寸、各层结构及对位标记。</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-primary" onclick="nextStep()">下一步 &#8594;</button>
+  </div>
+</div>
+
+<!-- ====== STEP 2: 掩膜特征 ====== -->
+<div class="step-content" data-step="2">
+  <div class="card" id="maskSizeCard">
+    <h3><span class="icon">&#127910;</span> 掩膜版尺寸</h3>
+    <div class="form-group">
+      <label>掩膜版尺寸</label>
+      <div class="radio-group" id="maskSizeGroup">
+        <label class="radio-option selected" onclick="selectRadio(this,'maskSize');updateMaskFeePreview();">
+          <input type="radio" name="maskSize" value="3inch" checked>
+          <span class="radio-indicator"></span>
+          <span class="radio-text">
+            <span class="radio-title">3 寸方形</span>
+            <span class="radio-desc">绘图范围 5.5&#215;5.5 cm | 铬版700元 / 菲林150元</span>
+          </span>
+        </label>
+        <label class="radio-option" onclick="selectRadio(this,'maskSize');updateMaskFeePreview();">
+          <input type="radio" name="maskSize" value="4inch">
+          <span class="radio-indicator"></span>
+          <span class="radio-text">
+            <span class="radio-title">4 寸方形</span>
+            <span class="radio-desc">绘图范围 7.5&#215;7.5 cm | 铬版900元 / 菲林150元</span>
+          </span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">&#128208;</span> 结构层数与每层最小特征尺寸</h3>
+    <div class="form-group">
+      <label>结构层数</label>
+      <div class="hint">单层还是多层套刻结构？</div>
+      <div class="radio-group" id="layerCountGroup">
+        <label class="radio-option selected" onclick="selectRadio(this,'layerCount');renderMaskLayers();renderMoldLayers();updateMoldFeePreview();">
+          <input type="radio" name="layerCount" value="1" checked>
+          <span class="radio-indicator"></span><span class="radio-text"><span class="radio-title">单层结构</span></span>
+        </label>
+        <label class="radio-option" onclick="selectRadio(this,'layerCount');renderMaskLayers();renderMoldLayers();updateMoldFeePreview();">
+          <input type="radio" name="layerCount" value="2">
+          <span class="radio-indicator"></span><span class="radio-text"><span class="radio-title">2层（含1层对位）</span></span>
+        </label>
+        <label class="radio-option" onclick="selectRadio(this,'layerCount');renderMaskLayers();renderMoldLayers();updateMoldFeePreview();">
+          <input type="radio" name="layerCount" value="multi">
+          <span class="radio-indicator"></span><span class="radio-text"><span class="radio-title">多层结构（含2层及以上对位）</span></span>
+        </label>
+      </div>
+    </div>
+    <div id="multiLayerInput" style="display:none;margin-top:12px;">
+      <div class="form-group">
+        <label>请输入总层数</label>
+        <input type="number" id="multiLayerCount" min="3" max="10" value="3" onchange="renderMaskLayers();renderMoldLayers();updateMoldFeePreview();" oninput="renderMaskLayers();renderMoldLayers();updateMoldFeePreview();">
+      </div>
+    </div>
+    <div id="maskLayerCards"></div>
+  </div>
+
+  <div class="kb-toggle" onclick="toggleKB('kb-mask')">&#128161; 了解掩膜类型与图案特征？点击查看解说</div>
+  <div id="maskFeePreview" class="info-banner" style="margin-top:12px;"></div>
+  <div class="kb-content" id="kb-mask">
+    <h4>什么是掩膜（光掩模）？</h4>
+    <p>掩膜就像微流控芯片的"底片"——一块印有芯片图案的透明板。紫外光通过掩膜照射到SU-8光刻胶上，透光部分固化，不透光部分被遮挡。</p>
+    <h4>菲林 vs 铬版怎么选？</h4>
+    <ul><li><b>菲林掩膜（150元/片）</b>：高精度打印机在透明胶片上打印。最小线宽20&#956;m，精度&#177;5&#956;m。适合通道较宽（&#62;50&#956;m）的芯片。</li><li><b>铬版掩膜（3寸700元/4寸900元）</b>：石英玻璃上镀铬，电子束刻蚀。最小线宽1.5&#956;m，精度&#177;0.5&#956;m。适合精细结构。</li></ul>
+    <h4>最小特征尺寸</h4>
+    <p>芯片上最细的线条或最窄的通道宽度。如果某层的最小特征尺寸小于掩膜类型的最小线宽，将无法加工，需选择更高精度的掩膜。</p>
+    <h4>图案密集程度</h4>
+    <p>图案面积占绘制区域的比例超过25%即为密集图案，加工难度显著增加，系数+1（计入模具制作）。</p>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-outline" onclick="prevStep()">&#8592; 上一步</button>
+    <button class="btn btn-primary" onclick="nextStep()">下一步 &#8594;</button>
+  </div>
+</div>
+
+<!-- ====== STEP 3: 模具特征 ====== -->
+<div class="step-content" data-step="3">
+  <div class="card">
+    <h3><span class="icon">&#9881;&#65039;</span> 硅片尺寸</h3>
+    <div class="form-group">
+      <label>硅片尺寸</label>
+      <div class="hint">4寸硅片对应3寸掩膜，5寸硅片对应4寸掩膜。对高度均一性要求高的设计，3寸掩膜建议使用5寸硅片制作。</div>
+      <div class="radio-group" id="waferSizeGroup">
+        <label class="radio-option selected" onclick="selectRadio(this,'waferSize');renderMoldLayers();updateMoldFeePreview();">
+          <input type="radio" name="waferSize" value="4inch" checked>
+          <span class="radio-indicator"></span>
+          <span class="radio-text">
+            <span class="radio-title">4 寸硅片</span>
+            <span class="radio-desc">2-30&#956;m高：1500元/层 | 30-100&#956;m高：2000元/层</span>
+          </span>
+        </label>
+        <label class="radio-option" onclick="selectRadio(this,'waferSize');renderMoldLayers();updateMoldFeePreview();">
+          <input type="radio" name="waferSize" value="5inch">
+          <span class="radio-indicator"></span>
+          <span class="radio-text">
+            <span class="radio-title">5 寸硅片</span>
+            <span class="radio-desc">2-30&#956;m高：2000元/层 | 30-100&#956;m高：2500元/层</span>
+          </span>
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">&#128208;</span> 每层结构高度与高宽比</h3>
+    <div id="moldLayerCards"></div>
+  </div>
+
+  <div class="kb-toggle" onclick="toggleKB('kb-mold')">&#128161; 了解SU-8模具与高宽比？点击查看解说</div>
+  <div id="moldFeePreview" class="info-banner" style="margin-top:12px;"></div>
+  <div class="kb-content" id="kb-mold">
+    <h4>什么是SU-8模具？</h4>
+    <p>SU-8是一种光刻胶（光敏树脂），通过紫外光曝光后固化，在硅片上形成微流控芯片的"模具"。后续将PDMS倒在模具上固化，就能复制出微流控通道。</p>
+    <h4>什么是多层套刻？</h4>
+    <p>当芯片需要不同高度的结构时，需要多次旋涂SU-8并分别曝光，每次需精确对准上一层位置。每增加一层对位层，加收500元。</p>
+    <h4>高宽比（Aspect Ratio）</h4>
+    <p>高宽比 = 结构高度 &#247; 最小特征尺寸。高宽比越大，加工难度越高。高宽比 &#62; 2 时属于高难度加工（系数+1）。</p>
+    <h4>高度误差</h4>
+    <p>一般难度：&#177;20% | 高难度：&#177;10%（系数+1） | 更高定制需求：由技术人员确认定价系数。</p>
+    <h4>对位误差要求</h4>
+    <p>多层套刻时需对准上一层位置。一般要求：对位误差&#60;10&#956;m | 高要求：对位误差&#8804;5&#956;m（系数+1）。</p>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-outline" onclick="prevStep()">&#8592; 上一步</button>
+    <button class="btn btn-primary" onclick="nextStep()">下一步 &#8594;</button>
+  </div>
+</div>
+
+<!-- ====== STEP 4: 芯片特征 ====== -->
+<div class="step-content" data-step="4">
+  <div class="card">
+    <h3><span class="icon">&#128300;</span> PDMS芯片生产规格</h3>
+    <div class="form-group">
+      <label>每板芯片数量</label>
+      <div class="hint">参考价：&#8804;6块且打孔&#60;60个 &#8594; 480元/板；超出6块每多1块 +40元</div>
+      <input type="number" id="chipsPerBoard" min="1" max="20" value="4" onchange="calcPDMS()" oninput="calcPDMS()">
+    </div>
+    <div class="form-group">
+      <label>每块芯片打孔数</label>
+      <div class="hint">进出口数量。每块芯片通常2-6个孔</div>
+      <input type="number" id="holesPerChip" min="1" max="20" value="4" onchange="calcPDMS()" oninput="calcPDMS()">
+    </div>
+    <div class="form-group">
+      <label>多层PDMS键合</label>
+      <div class="hint">每增加一次对位键合，芯片价格 &#215;3；2次对位键合 &#215;5</div>
+      <div class="radio-group" id="alignmentLayersGroup">
+        <label class="radio-option selected" onclick="selectRadio(this,'alignmentLayers');calcPDMS();">
+          <input type="radio" name="alignmentLayers" value="0" checked>
+          <span class="radio-indicator"></span><span class="radio-text"><span class="radio-title">无需对位键合（单层结构）</span></span>
+        </label>
+        <label class="radio-option" onclick="selectRadio(this,'alignmentLayers');calcPDMS();">
+          <input type="radio" name="alignmentLayers" value="1">
+          <span class="radio-indicator"></span><span class="radio-text"><span class="radio-title">1次对位键合（价格&#215;3）</span></span>
+        </label>
+        <label class="radio-option" onclick="selectRadio(this,'alignmentLayers');calcPDMS();">
+          <input type="radio" name="alignmentLayers" value="2">
+          <span class="radio-indicator"></span><span class="radio-text"><span class="radio-title">2次对位键合（价格&#215;5）</span></span>
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>PDMS板数量</label>
+      <input type="number" id="boardCount" min="1" max="20" value="1" onchange="calcPDMS()" oninput="calcPDMS()">
+    </div>
+    <div class="form-group">
+      <label>盖玻片规格</label>
+      <div class="radio-group" id="coverslipTypeGroup">
+        <label class="radio-option selected" onclick="selectRadio(this,'coverslipType')">
+          <input type="radio" name="coverslipType" value="24x60" checked>
+          <span class="radio-indicator"></span><span class="radio-text"><span class="radio-title">24&#215;60 mm 标准级盖玻片</span></span>
+        </label>
+        <label class="radio-option" onclick="selectRadio(this,'coverslipType')">
+          <input type="radio" name="coverslipType" value="25x75">
+          <span class="radio-indicator"></span><span class="radio-text"><span class="radio-title">25&#215;75 mm 标准级盖玻片</span></span>
+        </label>
+      </div>
+    </div>
+    <div class="pdms-calc" id="pdmsCalcResult">
+      <div style="font-size:13px;color:var(--text-secondary);">&#128202; 请填写芯片数量和打孔数，自动计算...</div>
+    </div>
+  </div>
+
+  <div class="kb-toggle" onclick="toggleKB('kb-pdms')">&#128161; 了解PDMS芯片加工？点击查看解说</div>
+  <div class="kb-content" id="kb-pdms">
+    <h4>PDMS芯片加工流程</h4>
+    <ol><li><b>浇铸复制</b>：液态PDMS倒在SU-8模具上，加热固化后撕下，PDMS表面复制出微通道结构。</li><li><b>切割</b>：将固化PDMS切成单个芯片。</li><li><b>打孔</b>：用打孔器在进出口位置打孔，用于连接管路。</li><li><b>键合</b>：PDMS与玻璃片氧等离子体处理后贴合，形成密封通道。</li></ol>
+    <h4>对位键合是什么？</h4>
+    <p>当芯片有两层PDMS需要精确对准后键合时，需显微镜辅助对准，工艺复杂。每增加一次对位键合，价格&#215;3；2次对位键合&#215;5。</p>
+  </div>
+
+  <div class="btn-row">
+    <button class="btn btn-outline" onclick="prevStep()">&#8592; 上一步</button>
+    <button class="btn btn-primary" onclick="nextStep()">下一步 &#8594;</button>
+  </div>
+</div>
+
+<!-- ====== STEP 5: 报价与验收 ====== -->
+<div class="step-content" data-step="5">
+  <div class="card">
+    <h3><span class="icon">&#128176;</span> 报价明细</h3>
+    <div id="quoteContent">
+      <p style="text-align:center;color:var(--text-secondary);padding:20px;">请先完成前面步骤的填写...</p>
+    </div>
+  </div>
+
+  <div class="card" id="difficultyCard" style="display:none">
+    <h3><span class="icon">&#128202;</span> 加工难度评估</h3>
+    <div id="difficultyContent"></div>
+    <div id="difficultyManual" style="margin-top:14px;padding-top:14px;border-top:1px dashed var(--border);">
+      <label style="font-size:13px;font-weight:600;display:block;margin-bottom:6px;">&#128295; 难度系数调整（默认自动计算，可手动修改）</label>
+      <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:8px;">
+        <div style="display:flex;align-items:center;gap:4px;">
+          <span style="font-size:12px;color:var(--text-secondary);">模具难度：</span>
+          <input type="number" id="manualMoldDifficulty" value="" step="0.1" min="1.0" placeholder="自动"
+            style="width:70px;padding:6px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-weight:700;text-align:center;font-family:inherit;"
+            onchange="onDifficultyChange()">
+        </div>
+        <div style="display:flex;align-items:center;gap:4px;">
+          <span style="font-size:12px;color:var(--text-secondary);">芯片难度：</span>
+          <input type="number" id="manualChipDifficulty" value="" step="0.1" min="1.0" placeholder="自动"
+            style="width:70px;padding:6px 10px;border:1.5px solid var(--border);border-radius:8px;font-size:14px;font-weight:700;text-align:center;font-family:inherit;"
+            onchange="onDifficultyChange()">
+        </div>
+        <button class="btn btn-outline" style="flex:0;font-size:11px;padding:4px 10px;" onclick="resetDifficulty()">重置</button>
+      </div>
+      <p style="font-size:11px;color:var(--text-secondary);margin-top:4px;">模具自动值：<span id="autoMoldLabel" style="font-weight:600;color:var(--primary);">-</span> | 芯片自动值：<span id="autoChipLabel" style="font-weight:600;color:var(--primary);">-</span> | 修改后自动刷新报价</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">&#9989;</span> 验收标准</h3>
+    <div id="acceptanceContent">
+      <p style="text-align:center;color:var(--text-secondary);padding:20px;">报价生成后自动显示验收标准...</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3><span class="icon">&#128203;</span> 需求汇总</h3>
+    <div id="summaryContent">
+      <p style="text-align:center;color:var(--text-secondary);padding:20px;">请完成前面所有步骤...</p>
+    </div>
+  </div>
+
+  <div class="bottom-btn-grid">
+    <button class="btn btn-outline" onclick="prevStep()">&#8592; 上一步</button>
+    <button class="btn btn-success" onclick="submitQuote()">&#128229; 提交数据</button>
+    <button class="btn btn-outline" onclick="resetAll()">&#128260; 重新填写</button>
+    <button class="btn" style="background:#7c3aed;color:#fff;" onclick="generateScreenshot(event)">&#128247; 生成报价单</button>
+  </div>
+
+  <div id="submitMsg" style="display:none;text-align:center;padding:12px;margin-top:8px;background:#e6f4ea;border-radius:8px;color:#0d904f;font-weight:600;"></div>
+  <div id="exportSection" style="display:none;margin-top:16px;padding:16px;background:#f8f9fa;border-radius:8px;border:1px solid #e0e0e0;">
+    <h4 style="margin:0 0 12px 0;">&#128229; 提交与导出</h4>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px;">
+      <button class="btn" style="background:#1a73e8;color:#fff;font-size:12px;padding:8px 16px;flex:0;" onclick="exportData()">&#128203; 复制数据</button>
+      <span style="font-size:11px;color:var(--text-secondary);">客户端：点击按钮复制数据 &#8594; 微信/邮件发送给北州</span>
+    </div>
+    <div style="margin-top:12px;border-top:1px solid #e0e0e0;padding-top:12px;">
+      <div style="font-size:12px;color:var(--text-secondary);margin-bottom:8px;">北州端：粘贴客户发来的数据 &#8594; 点击导入 &#8594; 在各步骤修改参数 &#8594; 重新报价</div>
+      <textarea id="importDataTA" placeholder="请在此粘贴客户发来的数据（JSON格式）..." style="width:100%;height:120px;font-size:11px;font-family:monospace;border:1px solid #ddd;border-radius:4px;padding:8px;resize:vertical;"></textarea>
+      <button class="btn" style="background:#34a853;color:#fff;font-size:12px;padding:8px 16px;flex:0;margin-top:8px;" onclick="handleImport()">&#128229; 导入数据</button>
+    </div>
+    <div id="exportMsg" style="display:none;margin-top:8px;padding:8px 12px;border-radius:6px;background:#e6f4ea;color:#0d904f;font-size:12px;"></div>
+    <div id="importMsg" style="display:none;margin-top:8px;padding:8px 12px;border-radius:6px;font-size:12px;"></div>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  北州芯片科技 &#183; 微流控芯片定制加工服务平台<br>
+  报价仅供参考，最终价格以双方协商确认为准<br>
+  <span style="font-size:10px;">单次费用满600元包邮 | 长期合作以双方议定价格为准</span>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var currentStep = 1;
+var totalSteps = 5;
+
+function showStep(n) {
+  document.querySelectorAll('.step-content').forEach(function(el) { el.classList.remove('active'); });
+  var target = document.querySelector('.step-content[data-step="' + n + '"]');
+  if (target) target.classList.add('active');
+
+  document.querySelectorAll('.step-dot').forEach(function(el) { el.classList.remove('active'); });
+  var dot = document.querySelector('.step-dot[data-step="' + n + '"]');
+  if (dot) dot.classList.add('active');
+
+  document.querySelectorAll('.step-label').forEach(function(el) { el.classList.remove('active'); });
+  var label = document.querySelector('.step-label[data-step="' + n + '"]');
+  if (label) label.classList.add('active');
+
+  for (var i = 1; i < n; i++) {
+    var d = document.querySelector('.step-dot[data-step="' + i + '"]');
+    if (d) { d.classList.add('done'); }
+  }
+  for (var j = n; j <= totalSteps; j++) {
+    var d2 = document.querySelector('.step-dot[data-step="' + j + '"]');
+    if (d2) { d2.classList.remove('done'); }
+  }
+
+  currentStep = n;
+  if (n === 5) generateQuote();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function nextStep() {
+  if (currentStep < totalSteps) { showStep(currentStep + 1); notifyParentScrollTop(); }
+}
+function prevStep() {
+  if (currentStep > 1) { showStep(currentStep - 1); notifyParentScrollTop(); }
+}
+
+function updateServiceVisibility() {
+  var needMask = document.getElementById('needMask').checked;
+  var needMold = document.getElementById('needMold').checked;
+  var needPDMS = document.getElementById('needPDMS').checked;
+
+  var maskSizeGroup = document.getElementById('maskSizeGroup');
+  if (maskSizeGroup) {
+    var fg = maskSizeGroup.closest('.form-group');
+    if (fg) fg.style.display = (needMask || needMold) ? '' : 'none';
+  }
+  var maskFeePreview = document.getElementById('maskFeePreview');
+  if (maskFeePreview) maskFeePreview.style.display = needMask ? '' : 'none';
+
+  var moldFeePreview = document.getElementById('moldFeePreview');
+  if (moldFeePreview) moldFeePreview.style.display = needMold ? '' : 'none';
+
+  var waferGroup = document.getElementById('waferSizeGroup');
+  if (waferGroup) {
+    var fg = waferGroup.closest('.form-group');
+    if (fg) fg.style.display = needMold ? '' : 'none';
+  }
+  var moldLayers = document.getElementById('moldLayerCards');
+  if (moldLayers) {
+    var card = moldLayers.closest('.card');
+    if (card) card.style.display = needMold ? '' : 'none';
+  }
+
+  var fields = ['chipsPerBoard', 'holesPerChip', 'boardCount'];
+  var groups = ['alignmentLayersGroup', 'coverslipTypeGroup'];
+  fields.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) {
+      var fg = el.closest('.form-group');
+      if (fg) fg.style.display = needPDMS ? '' : 'none';
+    }
+  });
+  groups.forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) {
+      var fg = el.closest('.form-group');
+      if (fg) fg.style.display = needPDMS ? '' : 'none';
+    }
+  });
+  var pdmsCalc = document.getElementById('pdmsCalcResult');
+  if (pdmsCalc) {
+    var card = pdmsCalc.closest('.card');
+    if (card) card.style.display = needPDMS ? '' : 'none';
+  }
+}
+
+function getLayerCount() {
+  var layerCountVal = getRadioVal('layerCount') || '1';
+  if (layerCountVal === 'multi') {
+    return parseInt(document.getElementById('multiLayerCount')?.value) || 3;
+  }
+  return parseInt(layerCountVal) || 1;
+}
+
+function renderMaskLayers() {
+  var n = getLayerCount();
+  var multiInput = document.getElementById('multiLayerInput');
+  if (multiInput) multiInput.style.display = (getRadioVal('layerCount') === 'multi') ? 'block' : 'none';
+
+  var container = document.getElementById('maskLayerCards');
+  if (!container) return;
+  var html = '';
+  for (var i = 1; i <= n; i++) {
+    html += '<div class="layer-card">';
+    html += '<div class="layer-title">第' + i + '层</div>';
+    html += '<div class="form-group"><label>掩膜类型</label>';
+    html += '<div class="radio-group">';
+    html += '<label class="radio-option selected" onclick="selectRadio(this,\'layerMaskType' + i + '\');updateFeatureRange(' + i + ');updateMaskFeePreview();">';
+    html += '<input type="radio" name="layerMaskType' + i + '" value="film" checked>';
+    html += '<span class="radio-indicator"></span>';
+    html += '<span class="radio-text"><span class="radio-title">菲林掩膜</span><span class="radio-desc">150元/片 | 精度&#177;5&#956;m | 最小线宽20&#956;m</span></span>';
+    html += '</label>';
+    html += '<label class="radio-option" onclick="selectRadio(this,\'layerMaskType' + i + '\');updateFeatureRange(' + i + ');updateMaskFeePreview();">';
+    html += '<input type="radio" name="layerMaskType' + i + '" value="chrome">';
+    html += '<span class="radio-indicator"></span>';
+    html += '<span class="radio-text"><span class="radio-title">铬版掩膜</span><span class="radio-desc">700/900元 | 精度&#177;0.5&#956;m | 最小线宽1.5&#956;m</span></span>';
+    html += '</label>';
+    html += '</div></div>';
+    html += '<div class="form-group"><label>最小特征尺寸（&#956;m）</label>';
+    html += '<div class="range-wrap">';
+    html += '<input type="range" id="layerFeatureSize' + i + '" min="1" max="500" value="50" onchange="updateFeatureRange(' + i + ')" oninput="updateFeatureRange(' + i + ')">';
+    html += '<div class="range-value" id="layerFeatureSizeVal' + i + '">50 \u03bcm</div>';
+    html += '</div></div>';
+    html += '<div class="form-group"><label>图案密集程度</label>';
+    html += '<div class="radio-group">';
+    html += '<label class="radio-option selected" onclick="selectRadio(this,\'layerDensity' + i + '\');">';
+    html += '<input type="radio" name="layerDensity' + i + '" value="non-dense" checked>';
+    html += '<span class="radio-indicator"></span><span class="radio-text"><span class="radio-title">非密集图案</span><span class="radio-desc">图案面积&#8804;可加工区域25%</span></span>';
+    html += '</label>';
+    html += '<label class="radio-option" onclick="selectRadio(this,\'layerDensity' + i + '\');">';
+    html += '<input type="radio" name="layerDensity' + i + '" value="dense">';
+    html += '<span class="radio-indicator"></span><span class="radio-text"><span class="radio-title">密集图案</span><span class="radio-desc">图案面积&#62;可加工区域25%（需技术人员确认）</span></span>';
+    html += '</label>';
+    html += '</div></div>';
+    html += '</div>';
+  }
+  container.innerHTML = html;
+}
+
+function updateFeatureRange(i) {
+  var slider = document.getElementById('layerFeatureSize' + i);
+  var display = document.getElementById('layerFeatureSizeVal' + i);
+  if (!slider || !display) return;
+  var val = parseInt(slider.value) || 50;
+  display.innerHTML = val + ' \u03bcm';
+  updateMoldFeePreview();
+  updateLayerHeight(i);
+}
+
+function renderMoldLayers() {
+  var n = getLayerCount();
+  var container = document.getElementById('moldLayerCards');
+  if (!container) return;
+  var html = '';
+  for (var i = 1; i <= n; i++) {
+    html += '<div class="layer-card">';
+    html += '<div class="layer-title">第' + i + '层</div>';
+    html += '<div class="form-group"><label>结构高度（&#956;m）</label>';
+    html += '<div class="range-wrap">';
+    html += '<input type="range" id="layerHeight' + i + '" min="2" max="200" value="30" onchange="updateLayerHeight(' + i + ')" oninput="updateLayerHeight(' + i + ')">';
+    html += '<div class="range-value" id="layerHeightVal' + i + '">30 \u03bcm</div>';
+    html += '</div></div>';
+    html += '<div id="aspectRatio' + i + '" style="margin-bottom:10px;"></div>';
+    html += '<div class="form-group"><label>高度误差要求</label>';
+    html += '<div class="radio-group">';
+    html += '<label class="radio-option selected" onclick="selectRadio(this,\'layerTolerance' + i + '\');">';
+    html += '<input type="radio" name="layerTolerance' + i + '" value="normal" checked>';
+    html += '<span class="radio-indicator"></span><span class="radio-text"><span class="radio-title">一般（&#177;20%）</span></span>';
+    html += '</label>';
+    html += '<label class="radio-option" onclick="selectRadio(this,\'layerTolerance' + i + '\');">';
+    html += '<input type="radio" name="layerTolerance' + i + '" value="high">';
+    html += '<span class="radio-indicator"></span><span class="radio-text"><span class="radio-title">高难度（&#177;10%，系数+1）</span></span>';
+    html += '</label>';
+    html += '<label class="radio-option" onclick="selectRadio(this,\'layerTolerance' + i + '\');">';
+    html += '<input type="radio" name="layerTolerance' + i + '" value="custom">';
+    html += '<span class="radio-indicator"></span><span class="radio-text"><span class="radio-title">更高定制需求</span><span class="radio-desc">由技术人员确认定价系数</span></span>';
+    html += '</label>';
+    html += '</div></div>';
+    if (i >= 2) {
+      html += '<div class="form-group"><label>对位误差要求</label>';
+      html += '<div class="radio-group">';
+      html += '<label class="radio-option selected" onclick="selectRadio(this,\'layerAlign' + i + '\');">';
+      html += '<input type="radio" name="layerAlign' + i + '" value="normal" checked>';
+      html += '<span class="radio-indicator"></span><span class="radio-text"><span class="radio-title">一般要求（&#60;10&#956;m）</span></span>';
+      html += '</label>';
+      html += '<label class="radio-option" onclick="selectRadio(this,\'layerAlign' + i + '\');">';
+      html += '<input type="radio" name="layerAlign' + i + '" value="high">';
+      html += '<span class="radio-indicator"></span><span class="radio-text"><span class="radio-title">高要求（&#8804;5&#956;m，系数+1）</span></span>';
+      html += '</label>';
+      html += '</div></div>';
+    }
+    html += '</div>';
+  }
+  container.innerHTML = html;
+  for (var j = 1; j <= n; j++) updateLayerHeight(j);
+  updateMoldFeePreview();
+}
+
+function updateLayerHeight(i) {
+  var slider = document.getElementById('layerHeight' + i);
+  var display = document.getElementById('layerHeightVal' + i);
+  if (!slider || !display) return;
+  var height = parseInt(slider.value) || 30;
+  display.innerHTML = height + ' \u03bcm';
+  var featureSize = parseInt(document.getElementById('layerFeatureSize' + i)?.value) || 50;
+  var ratio = height / featureSize;
+  var ratioEl = document.getElementById('aspectRatio' + i);
+  if (ratioEl) {
+    var isHigh = ratio > 2;
+    ratioEl.style.background = isHigh ? '#fce8e6' : '#e6f4ea';
+    ratioEl.style.color = isHigh ? '#d93025' : '#0d904f';
+    ratioEl.style.padding = '8px 12px';
+    ratioEl.style.borderRadius = '8px';
+    ratioEl.style.fontSize = '13px';
+    ratioEl.innerHTML = '高宽比：<b>' + height + ' / ' + featureSize + ' = ' + ratio.toFixed(2) + '</b>' + (isHigh ? ' <span style="font-weight:700;">&#9888; 高宽比&#62;2，高难度加工（系数+1）</span>' : '  &#10003; 在常规范围内');
+  }
+  updateMoldFeePreview();
+}
+
+function updateLayerRange(i) {
+  updateLayerHeight(i);
+}
+
+function updateMaskFeePreview() {
+  var needMask = document.getElementById('needMask').checked;
+  if (!needMask) { var el0 = document.getElementById('maskFeePreview'); if (el0) el0.style.display = 'none'; return; }
+  var maskSize = getRadioVal('maskSize') || '3inch';
+  var layers = getLayerCount();
+  var total = 0;
+  var details = [];
+  for (var i = 1; i <= layers; i++) {
+    var mt = getRadioVal('layerMaskType' + i) || 'film';
+    var fee = mt === 'film' ? 150 : (maskSize === '3inch' ? 700 : 900);
+    total += fee;
+    details.push('第' + i + '层：' + (mt === 'film' ? '菲林' : '铬版') + ' ' + fee + '元');
+  }
+  var el = document.getElementById('maskFeePreview');
+  if (el) el.innerHTML = '&#128204; <span>掩膜费用预估：' + details.join(' | ') + ' | <b>合计 &#165;' + total.toLocaleString() + '</b></span>';
+}
+
+function updateMoldFeePreview() {
+  var needMold = document.getElementById('needMold').checked;
+  if (!needMold) { var el0 = document.getElementById('moldFeePreview'); if (el0) el0.style.display = 'none'; return; }
+  var layers = getLayerCount();
+  var waferSize = getRadioVal('waferSize') || '4inch';
+  var total = 0;
+  var details = [];
+  for (var i = 1; i <= layers; i++) {
+    var h = parseInt(document.getElementById('layerHeight' + i)?.value) || 30;
+    var base = (h <= 30) ? (waferSize === '4inch' ? 1500 : 2000) : (waferSize === '4inch' ? 2000 : 2500);
+    total += base;
+    details.push('第' + i + '层：' + h + 'um ' + base + '元');
+  }
+  if (layers > 1) { total += 500 * (layers - 1); details.push('对位：' + (layers - 1) + '层 500元'); }
+  var el = document.getElementById('moldFeePreview');
+  if (el) el.innerHTML = '&#128204; <span>模具费用预估（不含难度系数）：' + details.join(' | ') + ' | <b>小计 &#165;' + total.toLocaleString() + '</b></span>';
+}
+
+function calcPDMS() {
+  var chips = parseInt(document.getElementById('chipsPerBoard').value) || 4;
+  var holes = parseInt(document.getElementById('holesPerChip').value) || 4;
+  var alignLayers = parseInt(getRadioVal('alignmentLayers')) || 0;
+  var boards = parseInt(document.getElementById('boardCount').value) || 1;
+  var totalHolesPerBoard = chips * holes;
+
+  var basePerBoard = 480;
+  if (chips > 6) { basePerBoard = 480 + (chips - 6) * 40; }
+  var alignMult = alignLayers === 2 ? 5 : (alignLayers === 1 ? 3 : 1);
+  var totalPerBoard = basePerBoard * alignMult;
+  var perChip = totalPerBoard / chips;
+  var grandTotal = totalPerBoard * boards;
+
+  var notes = [];
+  if (totalHolesPerBoard > 10 * chips) { notes.push('每板打孔数超过10倍芯片个数，需协商定价'); }
+  if (totalHolesPerBoard >= 60 && chips <= 6) { notes.push('打孔总数大于等于60，需协商定价'); }
+
+  var el = document.getElementById('pdmsCalcResult');
+  var html = '<div style="display:flex;justify-content:space-around;text-align:center;">';
+  html += '<div><div style="font-size:11px;color:var(--text-secondary);">每板价格</div><div style="font-size:16px;font-weight:700;">&#165;' + totalPerBoard.toLocaleString() + '</div></div>';
+  html += '<div><div style="font-size:11px;color:var(--text-secondary);">每块芯片单价</div><div style="font-size:16px;font-weight:700;color:var(--primary);">&#165;' + Math.round(perChip).toLocaleString() + '</div></div>';
+  html += '<div><div style="font-size:11px;color:var(--text-secondary);">PDMS总计</div><div style="font-size:16px;font-weight:700;color:var(--success);">&#165;' + grandTotal.toLocaleString() + '</div></div>';
+  html += '</div>';
+  if (alignLayers > 0) { html += '<div style="font-size:11px;color:var(--text-secondary);text-align:center;margin-top:6px;">含 ' + alignLayers + ' 次对位键合（&#215;' + alignMult + '）</div>'; }
+  if (notes.length > 0) { html += '<div style="font-size:11px;color:#d93025;text-align:center;margin-top:4px;">&#9888; ' + notes.join('；') + '</div>'; }
+  el.innerHTML = html;
+}
+
+function generateQuote() {
+  var layers = getLayerCount();
+  var maskSize = getRadioVal('maskSize') || '3inch';
+  var waferSize = getRadioVal('waferSize') || '4inch';
+  var chips = parseInt(document.getElementById('chipsPerBoard').value) || 4;
+  var holes = parseInt(document.getElementById('holesPerChip').value) || 4;
+  var alignLayers = parseInt(getRadioVal('alignmentLayers')) || 0;
+  var boards = parseInt(document.getElementById('boardCount').value) || 1;
+  var needDesign = document.getElementById('needDesign').checked;
+  var needDrawing = document.getElementById('needDrawing').checked;
+  var needMask = document.getElementById('needMask').checked;
+  var needMold = document.getElementById('needMold').checked;
+  var needPDMS = document.getElementById('needPDMS').checked;
+
+  var layerFeatureSizes = [];
+  var minSize = 200;
+  for (var fi = 1; fi <= layers; fi++) {
+    var fs = parseInt(document.getElementById('layerFeatureSize' + fi)?.value) || 50;
+    layerFeatureSizes.push(fs);
+    if (fs < minSize) minSize = fs;
+  }
+
+  var layerHeights = [];
+  var layerTolerances = [];
+  var hasHighTolerance = false;
+  var hasCustomTolerance = false;
+  for (var i = 1; i <= layers; i++) {
+    var h = parseInt(document.getElementById('layerHeight' + i)?.value) || 30;
+    var t = getRadioVal('layerTolerance' + i) || 'normal';
+    layerHeights.push(h);
+    layerTolerances.push(t);
+    if (t === 'high') hasHighTolerance = true;
+    if (t === 'custom') hasCustomTolerance = true;
+  }
+  var maxHeight = Math.max.apply(null, layerHeights);
+
+  // === Mold difficulty (模具制作难度) ===
+  var moldDiffCount = 0;
+  var moldDiffReasons = [];
+  var denseLayerCount = 0;
+  for (var di = 1; di <= layers; di++) {
+    var ld = getRadioVal('layerDensity' + di) || 'non-dense';
+    if (ld === 'dense') { denseLayerCount++; }
+  }
+  if (denseLayerCount > 0) { moldDiffCount += denseLayerCount; moldDiffReasons.push('密集图案：' + denseLayerCount + '层（+1/层）'); }
+  var hasHighAlign = false;
+  for (var ai = 2; ai <= layers; ai++) {
+    var la = getRadioVal('layerAlign' + ai) || 'normal';
+    if (la === 'high') { hasHighAlign = true; }
+  }
+  if (hasHighAlign) { moldDiffCount++; moldDiffReasons.push('高对位精度要求（&#8804;5um，+1）'); }
+  if (hasHighTolerance) { moldDiffCount++; moldDiffReasons.push('高度误差要求&#177;10%（+1）'); }
+  if (hasCustomTolerance) { moldDiffReasons.push('含更高定制需求层，需技术人员确认'); }
+  for (var fi2 = 0; fi2 < layers; fi2++) {
+    var ar = layerHeights[fi2] / layerFeatureSizes[fi2];
+    if (ar > 2 && moldDiffReasons.indexOf('高宽比&#62;2') < 0) { moldDiffCount++; moldDiffReasons.push('第' + (fi2+1) + '层高宽比=' + ar.toFixed(1) + '（+1）'); }
+  }
+  if (layers >= 3) { moldDiffReasons.push('多层套刻（大于等于3层）'); }
+  if (maxHeight > 100) { moldDiffCount++; moldDiffReasons.push('结构高度较大（&#62;100um，+1）'); }
+  if (minSize < 10) { moldDiffReasons.push('最小特征尺寸极小（&#60;10um）'); }
+  if (moldDiffReasons.length === 0) moldDiffReasons.push('参数均在常规范围内');
+
+  var autoMoldDiff = 1.0 + moldDiffCount * 1;
+  var manualMoldVal = document.getElementById('manualMoldDifficulty').value;
+  var moldDiffCoeff = (manualMoldVal !== '' && !isNaN(parseFloat(manualMoldVal))) ? parseFloat(manualMoldVal) : autoMoldDiff;
+  document.getElementById('autoMoldLabel').textContent = 'x' + autoMoldDiff.toFixed(1);
+  var isMoldHigh = moldDiffCoeff > 1.0;
+
+  // === Chip difficulty (芯片制作难度) ===
+  var chipDiffCount = 0;
+  var chipDiffReasons = [];
+  if (alignLayers > 0) { chipDiffCount += alignLayers; chipDiffReasons.push('PDMS对位键合' + alignLayers + '次（+1/次）'); }
+  if (chipDiffReasons.length === 0) chipDiffReasons.push('常规芯片制作');
+
+  var autoChipDiff = 1.0 + chipDiffCount * 1;
+  var manualChipVal = document.getElementById('manualChipDifficulty').value;
+  var chipDiffCoeff = (manualChipVal !== '' && !isNaN(parseFloat(manualChipVal))) ? parseFloat(manualChipVal) : autoChipDiff;
+  document.getElementById('autoChipLabel').textContent = 'x' + autoChipDiff.toFixed(1);
+
+  // === Pricing ===
+  var designFee = needDesign ? 2000 : 0;
+  var drawingFee = needDrawing ? (1000 * layers) : 0;
+  var maskFee = 0;
+  if (needMask) {
+    for (var mi = 1; mi <= layers; mi++) {
+      var lmt = getRadioVal('layerMaskType' + mi) || 'film';
+      var unit = lmt === 'film' ? 150 : (maskSize === '3inch' ? 700 : 900);
+      maskFee += unit;
+    }
+  }
+  var moldBaseFee = 0;
+  if (needMold) {
+    for (var j = 0; j < layers; j++) {
+      var hh = layerHeights[j];
+      var basePerLayer = (hh <= 30) ? (waferSize === '4inch' ? 1500 : 2000) : (waferSize === '4inch' ? 2000 : 2500);
+      moldBaseFee += basePerLayer;
+    }
+    if (layers > 1) { moldBaseFee += 500 * (layers - 1); }
+  }
+  var moldFee = needMold ? Math.round(moldBaseFee * moldDiffCoeff) : 0;
+
+  var pdmsBaseFee = 0;
+  var perChipPrice = 0;
+  var alignMult = alignLayers === 2 ? 5 : (alignLayers === 1 ? 3 : 1);
+  if (needPDMS) {
+    var basePerBoard = 480;
+    if (chips > 6) { basePerBoard = 480 + (chips - 6) * 40; }
+    var pdmsPerBoard = basePerBoard * alignMult;
+    pdmsBaseFee = pdmsPerBoard * boards;
+    perChipPrice = pdmsPerBoard / chips;
+  }
+  var pdmsFee = needPDMS ? Math.round(pdmsBaseFee * chipDiffCoeff) : 0;
+
+  var totalFee = designFee + drawingFee + maskFee + moldFee + pdmsFee;
+
+  var negotiationNotes = [];
+  if (needPDMS) {
+    var totalHolesPerBoard = chips * holes;
+    if (totalHolesPerBoard > 10 * chips) { negotiationNotes.push('每板打孔数超过10倍芯片个数，PDMS费用需协商定价'); }
+    if (totalHolesPerBoard >= 60 && chips <= 6) { negotiationNotes.push('打孔总数大于等于60，需协商定价'); }
+  }
+  if (hasCustomTolerance) { negotiationNotes.push('含更高定制需求层，由技术人员确认定价系数'); }
+
+  // === Render Quote ===
+  var quoteHTML = '<table class="quote-table">';
+  quoteHTML += '<tr><th>项目</th><th>说明</th><th class="price-col">费用（元）</th></tr>';
+  if (needDesign) { quoteHTML += '<tr><td>方案设计</td><td>根据需求定制芯片结构设计</td><td class="price-col">' + designFee.toLocaleString() + '</td></tr>'; }
+  if (needDrawing) { quoteHTML += '<tr><td>绘图</td><td>' + layers + '层 ' + (maskSize === '3inch' ? '3寸' : '4寸') + '</td><td class="price-col">' + drawingFee.toLocaleString() + '</td></tr>'; }
+  if (needMask) {
+    var maskDesc = '';
+    for (var mi2 = 1; mi2 <= layers; mi2++) { var lmt2 = getRadioVal('layerMaskType' + mi2) || 'film'; maskDesc += (mi2 > 1 ? ' / ' : '') + (lmt2 === 'film' ? '菲林' : '铬版'); }
+    maskDesc += ' ' + (maskSize === '3inch' ? '3寸' : '4寸') + ' x ' + layers + '层';
+    quoteHTML += '<tr><td>掩膜制作</td><td>' + maskDesc + '</td><td class="price-col">' + maskFee.toLocaleString() + '</td></tr>';
+  }
+  if (needMold) {
+    var moldDesc = 'SU-8模具 ' + (waferSize === '4inch' ? '4寸' : '5寸') + ' x ' + layers + '层';
+    if (layers > 1) moldDesc += ' 含对位';
+    if (isMoldHigh) moldDesc += ' [系数x' + moldDiffCoeff.toFixed(1) + ']';
+    moldDesc += ' (最大高度' + maxHeight + 'um)';
+    quoteHTML += '<tr><td>SU-8模具</td><td>' + moldDesc + '</td><td class="price-col">' + moldFee.toLocaleString() + '</td></tr>';
+  }
+  if (needPDMS) {
+    var pdmsDesc = 'PDMS芯片 ' + boards + '板 x ' + chips + '块/板（' + holes + '孔/块）';
+    if (alignLayers > 0) pdmsDesc += ' [对位键合x' + alignMult + ']';
+    if (chipDiffCoeff > 1.0) pdmsDesc += ' [系数x' + chipDiffCoeff.toFixed(1) + ']';
+    pdmsDesc += ' | 单价&#165;' + Math.round(perChipPrice).toLocaleString() + '/块';
+    quoteHTML += '<tr><td>PDMS芯片</td><td>' + pdmsDesc + '</td><td class="price-col">' + pdmsFee.toLocaleString() + '</td></tr>';
+  }
+  quoteHTML += '<tr class="total-row"><td colspan="2">合计</td><td class="price-col">&#165;' + totalFee.toLocaleString() + '</td></tr>';
+  quoteHTML += '<tr><td colspan="3" style="text-align:center;padding:12px;color:#d93025;font-size:12px;background:#fff3e0;">&#9888; 以上报价仅供参考，最终定价需由技术人员根据图纸确认</td></tr>';
+  negotiationNotes.forEach(function(note) { quoteHTML += '<tr class="note-row"><td colspan="3">&#9888; ' + note + '</td></tr>'; });
+  quoteHTML += '<tr class="note-row"><td colspan="3">&#128204; 报价仅供参考，最终价格以双方协商为准。单次满600元包邮。长期合作可议价。</td></tr>';
+  quoteHTML += '</table>';
+  document.getElementById('quoteContent').innerHTML = quoteHTML;
+
+  // === Render Difficulty ===
+  var diffCard = document.getElementById('difficultyCard');
+  diffCard.style.display = 'block';
+  var diffHTML = '';
+  // Mold difficulty
+  var moldBadge = isMoldHigh ? 'high' : 'low';
+  var moldLabel = isMoldHigh ? ('高难度（系数x' + moldDiffCoeff.toFixed(1) + '）') : '常规';
+  diffHTML += '<div style="margin-bottom:12px;">';
+  diffHTML += '<p><span class="difficulty-badge ' + moldBadge + '">模具制作难度：' + moldLabel + '</span></p>';
+  diffHTML += '<p style="font-size:12px;color:var(--text-secondary);margin-top:4px;">基础 1.0 + ' + moldDiffCount + '项 x 1 = <b>x' + autoMoldDiff.toFixed(1) + '</b></p>';
+  diffHTML += '<ul style="padding-left:18px;margin-top:4px;font-size:13px;">';
+  moldDiffReasons.forEach(function(r) { diffHTML += '<li>' + r + '</li>'; });
+  diffHTML += '</ul></div>';
+  // Chip difficulty
+  if (needPDMS) {
+    var chipBadge = chipDiffCoeff > 1.0 ? 'high' : 'low';
+    var chipLabel = chipDiffCoeff > 1.0 ? ('高难度（系数x' + chipDiffCoeff.toFixed(1) + '）') : '常规';
+    diffHTML += '<div><p><span class="difficulty-badge ' + chipBadge + '">芯片制作难度：' + chipLabel + '</span></p>';
+    diffHTML += '<p style="font-size:12px;color:var(--text-secondary);margin-top:4px;">基础 1.0 + ' + chipDiffCount + '项 x 1 = <b>x' + autoChipDiff.toFixed(1) + '</b></p>';
+    diffHTML += '<ul style="padding-left:18px;margin-top:4px;font-size:13px;">';
+    chipDiffReasons.forEach(function(r) { diffHTML += '<li>' + r + '</li>'; });
+    diffHTML += '</ul></div>';
+  }
+  document.getElementById('difficultyContent').innerHTML = diffHTML;
+
+  // === Render Acceptance ===
+  var accItems = [];
+  if (needMask) {
+    for (var am = 1; am <= layers; am++) { var amt = getRadioVal('layerMaskType' + am) || 'film'; accItems.push('第' + am + '层掩膜精度：' + (amt === 'chrome' ? '&#177;0.5 um（铬版）' : '&#177;5 um（菲林）')); }
+  }
+  if (needMold) {
+    for (var ak = 0; ak < layers; ak++) {
+      var tolLabel = layerTolerances[ak] === 'high' ? '&#177;10%' : (layerTolerances[ak] === 'custom' ? '定制（技术人员确认）' : '&#177;20%');
+      accItems.push('第' + (ak+1) + '层高度误差：' + tolLabel + '（高度' + layerHeights[ak] + 'um）');
+    }
+    accItems.push(isMoldHigh ? '模具成品率：1/2 ~ 5/6（高难度模具标准）' : '模具成品率：5/6（标准模具）');
+    if (layers > 1) {
+      var hasHighAlignAcc = false;
+      for (var al = 2; al <= layers; al++) { if ((getRadioVal('layerAlign' + al) || 'normal') === 'high') hasHighAlignAcc = true; }
+      accItems.push('多层套刻对位误差：' + (hasHighAlignAcc ? '&#8804;5 um（高要求）' : '&#60;10 um'));
+    }
+  }
+  if (needPDMS) {
+    if (alignLayers > 0) { accItems.push('PDMS对位键合误差：&#60;50 um（x' + alignMult + ' 定价系数）'); }
+    accItems.push('PDMS芯片：浇铸复制完整，通道无堵塞，进出口打孔通畅');
+    accItems.push('键合密封性：芯片无漏液，通道间无串扰');
+  }
+  var accHTML = '<ul class="acceptance-list">';
+  accItems.forEach(function(item) { accHTML += '<li><span class="check">&#10003;</span><span>' + item + '</span></li>'; });
+  accHTML += '</ul>';
+  document.getElementById('acceptanceContent').innerHTML = accHTML;
+
+  // === Render Summary ===
+  var sRow = function(label, val) {
+    return '<tr><td style="padding:6px 10px;color:var(--text-secondary);width:35%;vertical-align:top;">' + label + '</td><td style="padding:6px 10px;">' + val + '</td></tr>';
+  };
+  var sSection = function(title) {
+    return '<tr><td colspan="2" style="padding:8px 10px 4px;background:#f0f4ff;font-size:12px;font-weight:700;color:var(--primary-dark);border-bottom:2px solid var(--primary-light);">' + title + '</td></tr>';
+  };
+  var summaryHTML = '<table style="width:100%;font-size:13px;border-collapse:collapse;">';
+  summaryHTML += sSection('&#128203; 基本信息');
+  summaryHTML += sRow('姓名', document.getElementById('customerName').value || '未填写');
+  summaryHTML += sRow('单位', document.getElementById('customerOrg').value || '未填写');
+  summaryHTML += sRow('联系方式', document.getElementById('customerContact').value || '未填写');
+  var chipTypeSelect = document.getElementById('chipType');
+  var chipTypeLabel = chipTypeSelect ? (chipTypeSelect.options[chipTypeSelect.selectedIndex]?.text || '未选择') : '未选择';
+  summaryHTML += sRow('芯片类型', chipTypeLabel);
+  summaryHTML += sRow('应用场景', (document.getElementById('appScenario').value || '未填写'));
+  var svcList = [];
+  if (needDesign) svcList.push('方案设计');
+  if (needDrawing) svcList.push('绘图');
+  if (needMask) svcList.push('掩膜制作');
+  if (needMold) svcList.push('SU-8模具');
+  if (needPDMS) svcList.push('PDMS芯片');
+  summaryHTML += sSection('&#128736; 服务项目');
+  summaryHTML += sRow('已选服务', svcList.length > 0 ? svcList.join('、') : '未选择');
+  if (needMask || needMold) {
+    summaryHTML += sSection('&#127910; 掩膜特征');
+    summaryHTML += sRow('结构层数', layers + '层');
+    summaryHTML += sRow('掩膜尺寸', maskSize === '3inch' ? '3寸' : '4寸');
+    for (var sm = 0; sm < layers; sm++) {
+      var slmt = getRadioVal('layerMaskType' + (sm+1)) || 'film';
+      var sld = getRadioVal('layerDensity' + (sm+1)) || 'non-dense';
+      summaryHTML += sRow('第' + (sm+1) + '层掩膜', (slmt === 'film' ? '菲林' : '铬版') + ' | 特征尺寸' + layerFeatureSizes[sm] + 'um | ' + (sld === 'dense' ? '密集图案' : '非密集'));
+    }
+  }
+  if (needMold) {
+    summaryHTML += sSection('&#9881;&#65039; 模具特征');
+    summaryHTML += sRow('硅片尺寸', waferSize === '4inch' ? '4寸' : '5寸');
+    for (var mm = 0; mm < layers; mm++) {
+      var tolStr = layerTolerances[mm] === 'high' ? '&#177;10%' : (layerTolerances[mm] === 'custom' ? '定制' : '&#177;20%');
+      summaryHTML += sRow('第' + (mm+1) + '层结构', '高度' + layerHeights[mm] + 'um | 误差' + tolStr);
+    }
+    if (layers > 1) {
+      var hasHighAlignSum = false;
+      for (var sa = 2; sa <= layers; sa++) { if ((getRadioVal('layerAlign' + sa) || 'normal') === 'high') hasHighAlignSum = true; }
+      summaryHTML += sRow('对位精度', hasHighAlignSum ? '高要求（&#8804;5 um）' : '一般要求（&#60;10 um）');
+    }
+  }
+  if (needPDMS) {
+    summaryHTML += sSection('&#128300; 芯片特征');
+    summaryHTML += sRow('每板芯片数', chips + '块/板');
+    summaryHTML += sRow('每块打孔数', holes + '孔/块');
+    summaryHTML += sRow('PDMS板数', boards + '板');
+    if (alignLayers > 0) { summaryHTML += sRow('对位键合', alignLayers + '次（x' + alignMult + '）'); }
+    summaryHTML += sRow('盖玻片', getRadioVal('coverslipType') === '24x60' ? '24x60mm' : '25x75mm');
+  }
+  summaryHTML += sSection('&#128202; 难度与报价');
+  summaryHTML += sRow('模具难度系数', 'x' + moldDiffCoeff.toFixed(1) + (isMoldHigh ? '（高难度）' : '（常规）'));
+  if (needPDMS) { summaryHTML += sRow('芯片难度系数', 'x' + chipDiffCoeff.toFixed(1) + (chipDiffCoeff > 1.0 ? '（高难度）' : '（常规）')); }
+  summaryHTML += sRow('预估总价', '<span style="font-weight:700;color:var(--primary);font-size:16px;">&#165;' + totalFee.toLocaleString() + '</span>');
+  summaryHTML += '</table>';
+  document.getElementById('summaryContent').innerHTML = summaryHTML;
+}
+
+function toggleCheckbox(el, evt) {
+  if (evt) { evt.preventDefault(); evt.stopPropagation(); }
+  el.classList.toggle('checked');
+  var cb = el.querySelector('input[type="checkbox"]');
+  if (cb) cb.checked = el.classList.contains('checked');
+  if (el.id === 'optDrawing') {
+    var notice = document.getElementById('noDrawingNotice');
+    if (notice) notice.style.display = cb.checked ? 'none' : 'block';
+  }
+  updateServiceVisibility();
+}
+
+function selectRadio(el, groupName) {
+  var group = el.closest('.radio-group');
+  if (!group) return;
+  group.querySelectorAll('.radio-option').forEach(function(opt) { opt.classList.remove('selected'); });
+  el.classList.add('selected');
+  var input = el.querySelector('input[type="radio"]');
+  if (input) input.checked = true;
+}
+
+function getRadioVal(name) {
+  var el = document.querySelector('input[name="' + name + '"]:checked');
+  return el ? el.value : null;
+}
+
+function submitQuote() {
+  generateQuote();
+  var msgEl = document.getElementById('submitMsg');
+  msgEl.style.display = 'block';
+  msgEl.innerHTML = '&#9989; 询价已生成！<br>请将下方数据复制发送给北州芯片科技技术人员。';
+  var exportSection = document.getElementById('exportSection');
+  if (exportSection) exportSection.style.display = 'block';
+}
+
+function exportData() {
+  var data = {
+    customer: document.getElementById('customerName')?.value || '',
+    unit: document.getElementById('customerOrg')?.value || '',
+    contact: document.getElementById('customerContact')?.value || '',
+    scene: document.getElementById('appScenario')?.value || '',
+    chipType: document.getElementById('chipType')?.value || '',
+    needDesign: document.getElementById('needDesign').checked,
+    needDrawing: document.getElementById('needDrawing').checked,
+    needMask: document.getElementById('needMask').checked,
+    needMold: document.getElementById('needMold').checked,
+    needPDMS: document.getElementById('needPDMS').checked,
+    layerCount: getLayerCount(),
+    maskSize: getRadioVal('maskSize') || '3inch',
+    waferSize: getRadioVal('waferSize') || '4inch',
+    layers: [],
+    chips: parseInt(document.getElementById('chipsPerBoard')?.value) || 4,
+    holes: parseInt(document.getElementById('holesPerChip')?.value) || 4,
+    alignLayers: parseInt(getRadioVal('alignmentLayers') || '0'),
+    boards: parseInt(document.getElementById('boardCount')?.value) || 1,
+    coverslip: getRadioVal('coverslipType') || '24x60',
+    manualMoldDifficulty: document.getElementById('manualMoldDifficulty').value || '',
+    manualChipDifficulty: document.getElementById('manualChipDifficulty').value || '',
+  };
+  var n = getLayerCount();
+  for (var i = 1; i <= n; i++) {
+    data.layers.push({
+      maskType: getRadioVal('layerMaskType' + i) || 'film',
+      featureSize: parseInt(document.getElementById('layerFeatureSize' + i)?.value) || 50,
+      density: getRadioVal('layerDensity' + i) || 'non-dense',
+      height: parseInt(document.getElementById('layerHeight' + i)?.value) || 30,
+      tolerance: getRadioVal('layerTolerance' + i) || 'normal',
+      align: i >= 2 ? (getRadioVal('layerAlign' + i) || 'normal') : 'normal',
+    });
+  }
+  var json = JSON.stringify(data, null, 2);
+  var ta = document.getElementById('importDataTA');
+  if (ta) { ta.value = json; ta.style.display = 'block'; ta.select(); }
+  try {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(json).then(function() {
+        document.getElementById('exportMsg').style.display = 'block';
+        document.getElementById('exportMsg').innerHTML = '&#9989; 数据已复制到剪贴板！请粘贴到微信/邮件发送给北州芯片科技技术人员。';
+        setTimeout(function() { document.getElementById('exportMsg').style.display = 'none'; }, 5000);
+      }).catch(function() {
+        document.getElementById('exportMsg').style.display = 'block';
+        document.getElementById('exportMsg').innerHTML = '&#128203; 请手动复制上方文本框中的数据，发送给北州芯片科技技术人员。';
+      });
+    } else {
+      document.getElementById('exportMsg').style.display = 'block';
+      document.getElementById('exportMsg').innerHTML = '&#128203; 请手动复制上方文本框中的数据，发送给北州芯片科技技术人员。';
+    }
+  } catch(e) {
+    document.getElementById('exportMsg').style.display = 'block';
+    document.getElementById('exportMsg').innerHTML = '&#128203; 请手动复制上方文本框中的数据，发送给北州芯片科技技术人员。';
+  }
+}
+
+function handleImport() {
+  var ta = document.getElementById('importDataTA');
+  if (!ta || !ta.value.trim()) {
+    var msgEl = document.getElementById('importMsg');
+    msgEl.style.display = 'block';
+    msgEl.innerHTML = '&#9888; 请先粘贴数据再导入。';
+    msgEl.style.background = '#fef7e0';
+    msgEl.style.color = '#e89c00';
+    return;
+  }
+  try {
+    var data = JSON.parse(ta.value.trim());
+    loadData(data);
+    var msgEl = document.getElementById('importMsg');
+    msgEl.style.display = 'block';
+    msgEl.innerHTML = '&#9989; 数据导入成功！请在各步骤中查看和修改，完成后点击"报价验收"查看更新后的报价。';
+    msgEl.style.background = '#e6f4ea';
+    msgEl.style.color = '#0d904f';
+  } catch(err) {
+    var msgEl = document.getElementById('importMsg');
+    msgEl.style.display = 'block';
+    msgEl.innerHTML = '&#10060; 导入失败，请检查数据格式是否正确。';
+    msgEl.style.background = '#fce8e6';
+    msgEl.style.color = '#d93025';
+  }
+}
+
+function loadData(data) {
+  if (data.customer) document.getElementById('customerName').value = data.customer;
+  if (data.unit) document.getElementById('customerOrg').value = data.unit;
+  if (data.contact) document.getElementById('customerContact').value = data.contact;
+  if (data.scene) document.getElementById('appScenario').value = data.scene;
+  if (data.chipType) document.getElementById('chipType').value = data.chipType;
+
+  setCheckbox('needDesign', 'optDesign', data.needDesign === true);
+  setCheckbox('needDrawing', 'optDrawing', data.needDrawing === true);
+  setCheckbox('needMask', 'optMask', data.needMask === true);
+  setCheckbox('needMold', 'optMold', data.needMold === true);
+  setCheckbox('needPDMS', 'optPDMS', data.needPDMS === true);
+
+  var notice = document.getElementById('noDrawingNotice');
+  if (notice) notice.style.display = (data.needDrawing === true) ? 'none' : 'block';
+
+  if (data.layerCount) {
+    if (data.layerCount === 1) setRadio('layerCount', '1');
+    else if (data.layerCount === 2) setRadio('layerCount', '2');
+    else { setRadio('layerCount', 'multi'); document.getElementById('multiLayerInput').style.display = 'block'; document.getElementById('multiLayerCount').value = data.layerCount; }
+  }
+  if (data.maskSize) setRadio('maskSize', data.maskSize);
+  if (data.waferSize) setRadio('waferSize', data.waferSize);
+
+  renderMaskLayers();
+  renderMoldLayers();
+
+  if (data.layers) {
+    for (var i = 0; i < data.layers.length; i++) {
+      var li = i + 1;
+      var layer = data.layers[i];
+      if (layer.maskType) setRadio('layerMaskType' + li, layer.maskType);
+      if (layer.featureSize) { var fs = document.getElementById('layerFeatureSize' + li); if (fs) { fs.value = layer.featureSize; updateFeatureRange(li); } }
+      if (layer.density) setRadio('layerDensity' + li, layer.density);
+      if (layer.height) { var h = document.getElementById('layerHeight' + li); if (h) { h.value = layer.height; updateLayerHeight(li); } }
+      if (layer.tolerance) setRadio('layerTolerance' + li, layer.tolerance);
+      if (layer.align && li >= 2) setRadio('layerAlign' + li, layer.align);
+    }
+  }
+
+  if (data.chips) document.getElementById('chipsPerBoard').value = data.chips;
+  if (data.holes) document.getElementById('holesPerChip').value = data.holes;
+  if (data.alignLayers !== undefined) setRadio('alignmentLayers', String(data.alignLayers));
+  if (data.boards) document.getElementById('boardCount').value = data.boards;
+  if (data.coverslip) setRadio('coverslipType', data.coverslip);
+  if (data.manualMoldDifficulty) document.getElementById('manualMoldDifficulty').value = data.manualMoldDifficulty;
+  if (data.manualChipDifficulty) document.getElementById('manualChipDifficulty').value = data.manualChipDifficulty;
+
+  updateServiceVisibility();
+  updateMaskFeePreview();
+  updateMoldFeePreview();
+  calcPDMS();
+  showStep(1);
+  notifyParentScrollTop();
+}
+
+function setCheckbox(id, optId, checked) {
+  var cb = document.getElementById(id);
+  var opt = document.getElementById(optId);
+  if (cb) cb.checked = checked;
+  if (opt) { if (checked) opt.classList.add('checked'); else opt.classList.remove('checked'); }
+}
+
+function setRadio(name, value) {
+  var radio = document.querySelector('input[name="' + name + '"][value="' + value + '"]');
+  if (radio) {
+    radio.checked = true;
+    var label = radio.closest('.radio-option');
+    if (label) {
+      var group = label.closest('.radio-group');
+      if (group) group.querySelectorAll('.radio-option').forEach(function(o) { o.classList.remove('selected'); });
+      label.classList.add('selected');
+    }
+  }
+}
+
+function resetAll() {
+  if (confirm('确定要重新填写吗？所有已填写内容将被清除。')) {
+    try {
+      document.querySelectorAll('input[type="text"], textarea, input[type="number"]').forEach(function(el) { el.value = ''; });
+      document.querySelectorAll('.radio-option').forEach(function(el) { el.classList.remove('selected'); });
+      document.querySelectorAll('input[type="radio"]').forEach(function(el) { el.checked = false; });
+      document.getElementById('chipsPerBoard').value = 4;
+      document.getElementById('holesPerChip').value = 4;
+      document.getElementById('boardCount').value = 1;
+      document.getElementById('optDesign').classList.remove('checked');
+      document.getElementById('needDesign').checked = false;
+      document.getElementById('optDrawing').classList.remove('checked');
+      document.getElementById('needDrawing').checked = false;
+      document.getElementById('optMask').classList.remove('checked');
+      document.getElementById('needMask').checked = false;
+      document.getElementById('optMold').classList.remove('checked');
+      document.getElementById('needMold').checked = false;
+      document.getElementById('optPDMS').classList.remove('checked');
+      document.getElementById('needPDMS').checked = false;
+      document.getElementById('noDrawingNotice').style.display = 'block';
+      var defaults = { 'layerCount': '1', 'maskSize': '3inch', 'waferSize': '4inch', 'alignmentLayers': '0', 'coverslipType': '24x60' };
+      for (var key in defaults) { var radio = document.querySelector('input[name="' + key + '"][value="' + defaults[key] + '"]'); if (radio) { radio.checked = true; } }
+      document.querySelectorAll('.radio-group').forEach(function(group) { var first = group.querySelector('.radio-option'); if (first) first.classList.add('selected'); });
+      document.getElementById('quoteContent').innerHTML = '<p style="text-align:center;color:var(--text-secondary);padding:20px;">请先完成前面步骤的填写...</p>';
+      document.getElementById('acceptanceContent').innerHTML = '<p style="text-align:center;color:var(--text-secondary);padding:20px;">报价生成后自动显示验收标准...</p>';
+      document.getElementById('summaryContent').innerHTML = '<p style="text-align:center;color:var(--text-secondary);padding:20px;">请完成前面所有步骤...</p>';
+      document.getElementById('difficultyCard').style.display = 'none';
+      document.getElementById('manualMoldDifficulty').value = '';
+      document.getElementById('manualChipDifficulty').value = '';
+      document.getElementById('submitMsg').style.display = 'none';
+      var exportSec = document.getElementById('exportSection');
+      if (exportSec) exportSec.style.display = 'none';
+      var exportTA = document.getElementById('importDataTA');
+      if (exportTA) exportTA.value = '';
+      var exportMsg2 = document.getElementById('exportMsg');
+      if (exportMsg2) exportMsg2.style.display = 'none';
+      var importMsg2 = document.getElementById('importMsg');
+      if (importMsg2) importMsg2.style.display = 'none';
+      document.getElementById('pdmsCalcResult').innerHTML = '<div style="font-size:13px;color:var(--text-secondary);">&#128202; 请填写芯片数量和打孔数，自动计算...</div>';
+      renderMaskLayers();
+      renderMoldLayers();
+      calcPDMS();
+      updateMaskFeePreview();
+      updateMoldFeePreview();
+      updateServiceVisibility();
+    } catch(e) {
+      console.error('Reset error:', e);
+    } finally {
+      showStep(1);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      notifyParentScrollTop();
+    }
+  }
+}
+
+function toggleKB(id) { document.getElementById(id).classList.toggle('open'); }
+
+function onDifficultyChange() { generateQuote(); }
+
+function resetDifficulty() {
+  document.getElementById('manualMoldDifficulty').value = '';
+  document.getElementById('manualChipDifficulty').value = '';
+  generateQuote();
+}
+
+function generateScreenshot(evt) {
+  if (typeof html2canvas === 'undefined') { showToast('截图库加载中，请稍后再试'); return; }
+  if (evt) { evt.preventDefault(); }
+  showToast('正在生成报价单截图...');
+  var mainEl = document.querySelector('.main');
+  html2canvas(mainEl, { scale: 2, backgroundColor: '#f5f7fa', useCORS: true, scrollY: 0, windowHeight: mainEl.scrollHeight }).then(function(canvas) {
+    var link = document.createElement('a');
+    var name = document.getElementById('customerName').value || '客户';
+    var date = new Date();
+    var dateStr = date.getFullYear() + (date.getMonth()+1) + date.getDate();
+    link.download = '北州芯片科技_报价单_' + name + '_' + dateStr + '.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+    showToast('报价单截图已保存');
+  }).catch(function(err) { showToast('截图生成失败，请重试'); });
+}
+
+function showToast(msg) {
+  var toast = document.getElementById('toast');
+  toast.textContent = msg; toast.classList.add('show');
+  setTimeout(function() { toast.classList.remove('show'); }, 2000);
+}
+
+// ===== 网站内嵌适配：与父页面同步高度和滚动位置 =====
+function notifyParentScrollTop() {
+  try {
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: 'inquiry-scroll-top' }, '*');
+    }
+  } catch (e) {}
+}
+function postFrameHeight() {
+  try {
+    if (window.parent && window.parent !== window) {
+      window.parent.postMessage({ type: 'inquiry-height', height: document.documentElement.scrollHeight }, '*');
+    }
+  } catch (e) {}
+}
+window.addEventListener('resize', postFrameHeight);
+window.addEventListener('load', postFrameHeight);
+if (window.MutationObserver) {
+  new MutationObserver(postFrameHeight).observe(document.body, { childList: true, subtree: true });
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  renderMaskLayers();
+  renderMoldLayers();
+  calcPDMS();
+  updateMaskFeePreview();
+  updateMoldFeePreview();
+  updateServiceVisibility();
+  showStep(1);
+});
+</script>
+
+</body>
+</html>
